@@ -1,7 +1,7 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const { errorHandler } = require('./middlewares');
 const routers = require('./routers/index');
-const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
