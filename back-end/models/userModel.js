@@ -20,4 +20,4 @@ const getByEmail = async (mail) => {
 };
 
 
-module.exports = { getByEmail }
+module.exports = { getByEmail };

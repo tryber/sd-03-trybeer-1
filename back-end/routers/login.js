@@ -1,9 +1,9 @@
-const { Router } = require('express');
+const express = require('express');
 const loginController = require('../controllers/loginController');
 const rescue = require('express-rescue');
-const login = Router();
+const login = express.Router();
 
-login.route('/')
-  .post(rescue(loginController));
+login
+  .post('/', rescue(loginController));
 
 module.exports = login;

@@ -1,14 +1,20 @@
 const jwt = require('jsonwebtoken');
-const getUser = require('../models/userModel');
+const { getByEmail } = require('../models/userModel');
 
 const loginService = async (email, password) => {
-  const user = await getUser(email);
+  const user = await getByEmail(email);
+  
   if (user.password === password) {
-    delete user.password;
-    const token = jwt.sign(user);
-    return token;
+    const signOptions = {
+      algorithm: 'HS256',
+      expiresIn: '2d',
+    };
+    const { name, email, role } = user;
+    const userWithNoPassword = { name, email, role };
+    const token = jwt.sign(userWithNoPassword, 'paodebatata', signOptions);
+    return { token, name, email, role };
   }
-  return { code: 'invalid_user' };
+  return { error: 'invalid_user' };
 };
 
 module.exports = loginService;

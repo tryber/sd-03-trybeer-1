@@ -1,13 +1,12 @@
 const express = require('express');
 const { errorHandler } = require('./middlewares');
-const app = express();
 const routers = require('./routers/index');
 const bodyParser = require('body-parser');
 
+const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use((req) => console.log(req.body, req.path));
 app.use('/login', routers.login);
 app.use(errorHandler);
 
