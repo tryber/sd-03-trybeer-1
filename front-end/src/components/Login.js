@@ -34,7 +34,13 @@ function Login() {
       <form>
         <label htmlFor="email">
           E-Mail
-          <input type="email" id="email" onChange={ (event) => setEmail(event.target.value) } required />
+          <input
+            type="email"
+            id="email"
+            onChange={ (event) => setEmail(event.target.value) }
+            required
+            data-testid="email-input"
+          />
         </label>
 
         <label htmlFor="password">
@@ -45,12 +51,19 @@ function Login() {
             minLength="6"
             onChange={ (event) => setPassword(event.target.value) }
             required
+            data-testid="password-input"
           />
         </label>
 
-        <button type="submit" onClick={ (event) => handleSignIn(event, email, password, setError, history) }>Entrar</button>
+        <button
+          type="submit"
+          onClick={ (event) => handleSignIn(event, email, password, setError, history) }
+          data-testid="signin-btn"
+        >
+          Entrar
+        </button>
       </form>
-      <Link to="/register"><button type="button">Ainda não tenho conta</button></Link>
+      <Link to="/register"><button type="button" data-testid="no-account-btn">Ainda não tenho conta</button></Link>
     </div>
   );
 }
