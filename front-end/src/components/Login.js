@@ -7,14 +7,13 @@ const handleSignIn = async (e, email, password, setError, history) => {
   e.preventDefault();
   try {
     const response = await axios.post("http://localhost:3001/login",{ email, password });
-    if (response.error) {
-      return setError(response.error)
+    if (await response.message) {
     };
     localStorage.setItem('user', JSON.stringify(response.data));
     setError('');
     history.push(response.data.role === 'client' ? '/products' : '/admin/profile');
   } catch (err) {
-    console.log('Deu ruim', err)
+      return setError('Senha ou email inválidos');
   }
 };
 

@@ -4,7 +4,7 @@ const { getByEmail } = require('../models/userModel');
 const loginService = async (mail, password) => {
   const user = await getByEmail(mail);
 
-  if (user.password === password) {
+  if (user && user.password === password) {
     const signOptions = {
       algorithm: 'HS256',
       expiresIn: '2d',
