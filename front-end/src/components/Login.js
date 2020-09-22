@@ -12,7 +12,7 @@ const handleSignIn = async (e, email, password, setError, history) => {
     }
     localStorage.setItem('user', JSON.stringify(response.data));
     setError('');
-    return history.push(response.data.role === 'client' ? '/products' : '/admin/profile');
+    return history.push(response.data.role === 'client' ? '/products' : '/admin/orders');
   } catch (err) {
     return setError(err);
   }
@@ -57,7 +57,7 @@ function Login() {
         </label>
 
         <label htmlFor="password">
-          Senha
+          Password
           <input
             type="password"
             id="password"
