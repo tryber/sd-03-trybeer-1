@@ -77,7 +77,7 @@ function Login() {
           ENTRAR
         </button>
       </form>
-      <Link to="/register"><button type="button" data-testid="no-account-btn">Ainda nao tenho conta</button></Link>
+      <Link to="/register"><button type="button" data-testid="no-account-btn">Ainda não tenho conta</button></Link>
     </div>
   );
 }
