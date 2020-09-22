@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 
 export const ContextAplication = createContext();
 
-const AplicationProvider = ({children}) => {
+const AplicationProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,6 +22,5 @@ const AplicationProvider = ({children}) => {
     </ContextAplication.Provider>
   );
 };
-
 
 export default AplicationProvider;
