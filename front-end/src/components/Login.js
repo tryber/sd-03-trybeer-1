@@ -36,7 +36,7 @@ function Login() {
     const pLength = 6;
 
     if (!validEmailRegEx.test(email)
-      || (password.length <= pLength)) return setInformations(true);
+      || (password.length < pLength)) return setInformations(true);
 
     return setInformations(false);
   }, [email, password]);
@@ -46,7 +46,7 @@ function Login() {
       {error && <h3>{ error }</h3>}
       <form>
         <label htmlFor="email">
-          E-Mail
+          Email
           <input
             type="email"
             id="email"
