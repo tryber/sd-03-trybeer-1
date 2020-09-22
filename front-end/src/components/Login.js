@@ -10,12 +10,10 @@ const handleSignIn = async (e, email, password, setError, history) => {
       email,
       password,
     });
-    if (await response.message) {
-    }
     localStorage.setItem('user', JSON.stringify(response.data));
     setError('');
-    history.push(
-      response.data.role === 'client' ? '/products' : '/admin/profile'
+    return history.push(
+      response.data.role === 'client' ? '/products' : '/admin/profile',
     );
   } catch (err) {
     return setError('Senha ou email inválidos');
@@ -50,7 +48,7 @@ function Login() {
       {error && <h3>{ error }</h3>}
       <form>
         <label htmlFor="email">
-          E-Mail
+          Email
           <input
             type="email"
             id="email"
