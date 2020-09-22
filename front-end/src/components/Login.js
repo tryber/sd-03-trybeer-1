@@ -74,10 +74,10 @@ function Login() {
           onClick={ (event) => handleSignIn(event, email, password, setError, history) }
           data-testid="signin-btn"
         >
-          Entrar
+          ENTRAR
         </button>
       </form>
-      <Link to="/register"><button type="button" data-testid="no-account-btn">Ainda não tenho conta</button></Link>
+      <Link to="/register"><button type="button" data-testid="no-account-btn">Ainda nao tenho conta</button></Link>
     </div>
   );
 }
