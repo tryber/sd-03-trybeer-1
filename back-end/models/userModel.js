@@ -9,12 +9,12 @@ const getByEmail = async (mail) => {
       .where('email = :email')
       .bind('email', mail)
       .execute();
-      const result = await searchDb.fetchAll()[0]
+    const result = await searchDb.fetchAll()[0];
     if (result) {
       const [id, name, email, password, role] = result;
       console.log(id, name, email, password, role);
       return id && password ? { id, email, password, name, role } : null;
-    };
+    }
     return null;
   } catch (err) {
     console.error(err);
