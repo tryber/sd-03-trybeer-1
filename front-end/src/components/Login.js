@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { ContextAplication } from '../context/ContextAplication';
 import axios from 'axios';
+import { ContextAplication } from '../context/ContextAplication';
 
 const handleSignIn = async (e, email, password, setError, history) => {
   e.preventDefault();
@@ -34,7 +34,7 @@ function Login() {
   const history = useHistory();
   return (
     <div>
-      {error && <h3>{error}</h3>}
+      {error && <h3>{ error }</h3>}
       <form>
         <label htmlFor='email'>E-Mail</label>
         <input
