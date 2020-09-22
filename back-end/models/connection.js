@@ -10,17 +10,19 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-let schema;
-module.exports = () =>
-  schema
+const connection = () => {
+  let schema;
+  return schema
     ? Promise.resolve(schema)
     : mysqlx
-        .getSession(config)
-        .then(async (session) => {
-          schema = await session.getSchema('Trybeer');
-          return schema;
-        })
-        .catch((err) => {
-          console.error(err);
-          process.exit(1);
-        });
+      .getSession(config)
+      .then(async (session) => {
+        schema = await session.getSchema('Trybeer');
+        return schema;
+      })
+      .catch((err) => {
+        console.error(err);
+        process.exit(1);
+      });
+};
+module.exports = connection;

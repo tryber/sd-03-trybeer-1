@@ -1,3 +1,3 @@
-const login = require('./login')
+const login = require('./login');
 
-module.exports = { login }
+module.exports = { login };
