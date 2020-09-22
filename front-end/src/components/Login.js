@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { ContextAplication } from '../context/ContextAplication';
@@ -27,7 +27,20 @@ function Login() {
     error,
     setError,
   } = useContext(ContextAplication);
+
+  const [informations, setInformations] = useState(true);
   const history = useHistory();
+
+  useEffect(() => {
+    const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
+    const pLength = 6;
+
+    if (!validEmailRegEx.test(email)
+      || (password.length <= pLength)) return setInformations(true);
+
+    return setInformations(false);
+  }, [email, password]);
+
   return (
     <div>
       {error && <h3>{ error }</h3>}
@@ -56,6 +69,7 @@ function Login() {
         </label>
 
         <button
+          disabled={ informations }
           type="submit"
           onClick={ (event) => handleSignIn(event, email, password, setError, history) }
           data-testid="signin-btn"
