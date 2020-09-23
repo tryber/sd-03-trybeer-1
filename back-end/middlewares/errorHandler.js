@@ -1,6 +1,6 @@
 const errors = {
   invalid_user: { message: 'Email or password not valid', status: 401 },
-  // invalid_entries: { message: 'Invalid entries. Try again.', status: 400 },
+  email_in_use: { message: 'Email already exists ', status: 409 },
 };
 
 function makeError(err) {

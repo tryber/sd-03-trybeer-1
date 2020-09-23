@@ -25,4 +25,5 @@ const connection = () => {
         process.exit(1);
       });
 };
+
 module.exports = connection;
