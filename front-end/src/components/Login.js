@@ -28,6 +28,7 @@ function Login() {
     setError,
   } = useContext(ContextAplication);
 
+  //validation based on code from https://github.com/tryber/sd-04-recipes-app-4/blob/master/src/pages/Login.jsx
   const [informations, setInformations] = useState(true);
   const history = useHistory();
 
