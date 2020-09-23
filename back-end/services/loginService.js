@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const { getByEmail } = require('../models/userModel');
 
-const loginService = async (email, password) => {
-  const user = await getByEmail(email);
-  
-  if (user.password === password) {
+const loginService = async (mail, password) => {
+  const user = await getByEmail(mail);
+
+  if (user && user.password === password) {
     const signOptions = {
       algorithm: 'HS256',
       expiresIn: '2d',
