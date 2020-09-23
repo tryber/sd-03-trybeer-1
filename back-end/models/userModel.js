@@ -1,8 +1,8 @@
-const connect = require('./connection');
+const connection = require('./connection');
 
 const getByEmail = async (mail) => {
   try {
-    const db = await connect();
+    const db = await connection();
     const searchDb = await db
       .getTable('users')
       .select()
@@ -18,16 +18,14 @@ const getByEmail = async (mail) => {
   }
 };
 
-const registerUser = async ({ name, email, password, role }) =>
-  connection().then((db) =>
-    db
-      .getTable('users')
-      .insert(['name', 'email', 'password', 'role'])
-      .values(name, email, password, role)
-      .execute()
-  );
+const registerUser = async ({ name, email, password, role }) => connection()
+  .then((db) => db
+    .getTable('users')
+    .insert(['name', 'email', 'password', 'role'])
+    .values(name, email, password, role)
+    .execute());
 
-module.exports = { 
+module.exports = {
   getByEmail,
   registerUser,
 };

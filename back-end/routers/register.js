@@ -4,7 +4,6 @@ const { createUser } = require('../controllers/registerController');
 
 const register = express.Router();
 
-register
-  .post('/register', rescue(createUser));
+register.post('/register', rescue(createUser));
 
 module.exports = register;

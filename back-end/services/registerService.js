@@ -5,7 +5,7 @@ const createUser = async (userInfo) => {
 
   const result = await userModel.getByEmail(email);
   if (result) {
-    return { error: true, message: 'Email already exists ' };
+    return { error: 'email_in_use' };
   }
   const whichRole = role === 'true' ? 'administrator' : 'client';
   const modelInfo = { name, email, password, whichRole };
@@ -13,4 +13,4 @@ const createUser = async (userInfo) => {
   return createdUser;
 };
 
-module.exports = { createUser }
+module.exports = { createUser };
