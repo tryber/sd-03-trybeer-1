@@ -38,7 +38,7 @@ function Login() {
     const pLength = 6;
 
     if (!validEmailRegEx.test(email)
-      || (password.length <= pLength)) return setInformations(true);
+      || (password.length < pLength)) return setInformations(true);
 
     return setInformations(false);
   }, [email, password]);
@@ -59,7 +59,7 @@ function Login() {
         </label>
 
         <label htmlFor="password">
-          Senha
+          Password
           <input
             type="password"
             id="password"
@@ -76,7 +76,7 @@ function Login() {
           onClick={ (event) => handleSignIn(event, email, password, setError, history) }
           data-testid="signin-btn"
         >
-          Entrar
+          ENTRAR
         </button>
       </form>
       <Link to="/register"><button type="button" data-testid="no-account-btn">Ainda não tenho conta</button></Link>
