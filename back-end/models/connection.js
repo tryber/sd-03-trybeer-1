@@ -10,7 +10,7 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
-module.exports = () => {
+const connection = () => {
   let schema;
   return schema
     ? Promise.resolve(schema)
@@ -25,3 +25,5 @@ module.exports = () => {
         process.exit(1);
       });
 };
+
+module.exports = connection;
