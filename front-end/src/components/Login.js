@@ -6,15 +6,15 @@ import { ContextAplication } from '../context/ContextAplication';
 const handleSignIn = async (e, email, password, setError, history) => {
   e.preventDefault();
   try {
-    const response = await axios.post('http://localhost:3001/login', { email, password });
-    if (response.error) {
-      return setError(response.error);
-    }
+    const response = await axios.post('http://localhost:3001/login', {
+      email,
+      password,
+    });
     localStorage.setItem('user', JSON.stringify(response.data));
     setError('');
     return history.push(response.data.role === 'client' ? '/products' : '/admin/orders');
   } catch (err) {
-    return setError(err);
+    return setError('Senha ou email inválidos');
   }
 };
 
