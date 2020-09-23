@@ -17,7 +17,6 @@ const getByEmail = async (mail) => {
       return id && password ? { id, email, password, name, role } : null;
     }
     return null;
-
   } catch (err) {
     console.error(err);
     return process.exit(1);
@@ -35,5 +34,3 @@ module.exports = {
   getByEmail,
   registerUser,
 };
-=======
-module.exports = { getByEmail };
