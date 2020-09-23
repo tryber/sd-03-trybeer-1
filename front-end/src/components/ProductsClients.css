@@ -1,0 +1,16 @@
+.products-list{
+  display: flex;
+  flex-wrap: wrap;
+  width: 360px;
+}
+
+.product-card{
+  height: 200px;
+  width: 150px;
+}
+
+.quantity-div{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100px;
+}
