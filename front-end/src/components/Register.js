@@ -14,7 +14,6 @@ async function submitRegister(e, email, password, name, checkbox, history, setEr
     });
     localStorage.setItem('user', JSON.stringify(response.data.token));
     setError('');
-    console.log('check')
     return history.push(checkbox ? 'admin/orders' : '/products');
   } catch (err) {
     return setError('E-mail already in database.');
