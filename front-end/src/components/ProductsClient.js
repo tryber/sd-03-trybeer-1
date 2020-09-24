@@ -4,6 +4,9 @@ import ProductCard from './ProductCard';
 import ClientMenu from './ClientMenu';
 import './ProductsClients.css';
 
+const zero = 0;
+const two = 2;
+
 const getProductsList = () => {
   // replace this with API call
   const products = [
@@ -44,27 +47,27 @@ const getProductsList = () => {
   return products;
 };
 
-const cartTotal = (cart) => cart.reduce((acc, item) => acc + (item.product.price * item.qnt), 0);
+const cartTotal = (cart) => cart.reduce((acc, item) => acc + (item.product.price * item.qnt), zero);
 
 function ProductsClient() {
   const products = getProductsList();
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   const user = JSON.parse(localStorage.getItem('user')) || null;
-  const disabled = cart.length < 1 ? true : false;
+  const disabled = cart.length < 1;
   return (
     <div className="products-page-div">
-      { user === null && <Redirect to="/login"/>}
+      { user === null && <Redirect to="/login" />}
       <ClientMenu />
       <div className="products-list">
         {products.map((p, index) => ProductCard(p, index, cart))}
       </div>
-        <div className="checkout-bottom">
-        <Link to="/checkout"><button data-testid="checkout-bottom-btn" disabled={ disabled }>Ver Carrinho</button></Link>
-          <p data-testid="checkout-bottom-btn-value">
-            R$
-            {` ${cartTotal(cart).toFixed(2).toString().replace('.', ",")}`}
-          </p>
-        </div>
+      <div className="checkout-bottom">
+        <Link to="/checkout"><button type="button" data-testid="checkout-bottom-btn" disabled={ disabled }>Ver Carrinho</button></Link>
+        <p data-testid="checkout-bottom-btn-value">
+          R$
+          {` ${cartTotal(cart).toFixed(two).toString().replace('.', ',')}`}
+        </p>
+      </div>
     </div>
   );
 }

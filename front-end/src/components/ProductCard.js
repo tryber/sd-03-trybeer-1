@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+const zero = 0;
+const plusOne = 1;
+const minusOne = -1;
+const two = 2;
+
 const deleteProduct = (p, cart) => {
   const newCart = cart.reduce((acc, product) => {
     if (product.product.id !== p.id) {
@@ -12,7 +17,7 @@ const deleteProduct = (p, cart) => {
 
 const updateCart = (add, qnt, setQnt, p) => {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  if (qnt + add > 0) {
+  if (qnt + add > zero) {
     setQnt(qnt + add);
     const answer = cart.some((item) => item.product.product === p.product);
     if (answer) {
@@ -27,17 +32,17 @@ const updateCart = (add, qnt, setQnt, p) => {
       localStorage.setItem('cart', JSON.stringify([...cart, { product: p, qnt: qnt + add }]));
     }
   } else {
-    setQnt(0);
+    setQnt(zero);
     deleteProduct(p, cart);
   }
 };
 
 const defineQnt = (p, cart) => {
   const answer = cart.filter((item) => item.product.product === p.product);
-  if (answer.length !== 0) {
+  if (answer.length !== zero) {
     return answer[0].qnt;
   }
-  return 0;
+  return zero;
 };
 
 const ProductCard = (p, index, cart) => {
@@ -50,12 +55,12 @@ const ProductCard = (p, index, cart) => {
       <h3 data-testid={ `${index}-product-name` }>{ product }</h3>
       <p data-testid={ `${index}-product-price` }>
         R$
-        { ` ${price.toFixed(2).toString().replace('.', ",")}` }
+        { ` ${price.toFixed(two).toString().replace('.', ',')}` }
       </p>
       <div className="quantity-div">
-        <button type="button" data-testid={ `${index}-product-minus` } onClick={ () => updateCart(-1, qnt, setQnt, p) }> - </button>
+        <button type="button" data-testid={ `${index}-product-minus` } onClick={ () => updateCart(minusOne, qnt, setQnt, p) }> - </button>
         <p data-testid={ `${index}-product-qtd` }>{ qnt }</p>
-        <button type="button" data-testid={ `${index}-product-plus` } onClick={ () => updateCart(1, qnt, setQnt, p) }> + </button>
+        <button type="button" data-testid={ `${index}-product-plus` } onClick={ () => updateCart(plusOne, qnt, setQnt, p) }> + </button>
       </div>
     </div>
   );
