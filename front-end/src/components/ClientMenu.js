@@ -28,7 +28,7 @@ function ClientMenu() {
             data-testid="top-hamburguer"
           />
         </button>
-        <h1 data-testid="top-title">Trybeer</h1>
+        <h1 data-testid="top-title">TryBeer</h1>
       </navbar>
       <aside className={ `${sidebar} side-menu-container` }>
         <div>

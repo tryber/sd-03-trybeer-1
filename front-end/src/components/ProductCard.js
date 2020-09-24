@@ -50,7 +50,7 @@ const ProductCard = (p, index, cart) => {
       <h3 data-testid={ `${index}-product-name` }>{ product }</h3>
       <p data-testid={ `${index}-product-price` }>
         R$
-        { price.toFixed(2) }
+        { ` ${price.toFixed(2).toString().replace('.', ",")}` }
       </p>
       <div className="quantity-div">
         <button type="button" data-testid={ `${index}-product-minus` } onClick={ () => updateCart(-1, qnt, setQnt, p) }> - </button>

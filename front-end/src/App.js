@@ -9,6 +9,7 @@ function App() {
   return (
     <AplicationProvider>
       <Switch>
+        <Route exact path="/" component={ LoginScreen } />
         <Route exact path="/login" component={ LoginScreen } />
         <Route exact path="/products" component={ ProductsClient } />
       </Switch>
