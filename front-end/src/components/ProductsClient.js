@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
+import ClientMenu from './ClientMenu';
 import './ProductsClients.css';
 
 const getProductsList = () => {
@@ -27,7 +28,8 @@ function ProductsClient() {
   const products = getProductsList();
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   return (
-    <div>
+    <div className="products-page-div">
+      <ClientMenu />
       <div className="products-list">
         {products.map((p, index) => ProductCard(p, index, cart))}
       </div>
