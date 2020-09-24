@@ -34,5 +34,3 @@ module.exports = {
   getByEmail,
   registerUser,
 };
-
-module.exports = { getByEmail };

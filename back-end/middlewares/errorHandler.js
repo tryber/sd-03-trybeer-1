@@ -1,13 +1,19 @@
 const errors = {
   invalid_user: { message: 'Email or password not valid', status: 401 },
   email_in_use: { message: 'Email already exists ', status: 409 },
+  token_error: { message: 'Invalid token ', status: 401 },
 };
 
 function makeError(err) {
-  return {
-    status: errors[err].status,
-    payload: { message: errors[err].message },
-  };
+  try {
+    return {
+      status: errors[err].status,
+      payload: { message: errors[err].message },
+    };
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
 }
 
 module.exports = (err, _req, res, _next) => {
