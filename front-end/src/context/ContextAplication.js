@@ -7,7 +7,6 @@ const AplicationProvider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [cart, setCart] = useState([]);
 
   const context = {
     email,
@@ -16,8 +15,6 @@ const AplicationProvider = ({ children }) => {
     setPassword,
     error,
     setError,
-    cart,
-    setCart,
   };
 
   return (
