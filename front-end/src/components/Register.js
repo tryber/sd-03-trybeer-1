@@ -35,10 +35,10 @@ export default function Register() {
     const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
     const pLength = 6;
     const nameLength = 14;
-    const hasNumberInName = /\d/.test(name);
+    const testName = /^[ a-z]+$/i.test(name);
 
     if (!validEmailRegEx.test(email)
-      || (password.length < pLength || name.length < nameLength || hasNumberInName)) {
+      || (password.length < pLength || name.length < nameLength || !testName)) {
       return setDisabled(true);
     }
     return setDisabled(false);

@@ -10,6 +10,7 @@ function App() {
     <AplicationProvider>
       <Switch>
         <Route exact path="/login" component={ LoginScreen } />
+        <Route exact path="/" component={ LoginScreen } />
         <Route exact path="/register" component={ RegisterScreen } />
       </Switch>
     </AplicationProvider>
