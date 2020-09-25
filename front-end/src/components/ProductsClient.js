@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import ProductCard from './ProductCard';
-import ClientMenu from './ClientMenu';
+import { ClientMenu } from './Menu/index';
 import './ProductsClients.css';
 
 const zero = 0;
