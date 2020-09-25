@@ -1,55 +1,35 @@
 .top-menu {
   align-items: center;
-  background-color: white;
-  color: black;
+  background-color: darkgrey;
   display: flex;
   height: 60px;
-  justify-content: space-between;
+  justify-content: space-evenly;
   position: fixed;
-  width: 100%;
+  width: 360px;
 }
 
-.menu-button {
-  background-color: white;
-  border: none;
+.menu-icon {
+  height: 30px;
+  width: auto;
 }
 
 .sidebar {
-  background-color: white;
+  background-color: darkgrey;
   display: flex;
   flex-direction: column;
-  height: 90vh;
-  padding: 20px;
+  height: 640px;
   position: absolute;
-  top: 45px;
   width: 150px;
   z-index: 2;
 }
 
 .sidebar button {
-  background-color: white;
-  border: none;
-  color: black;
-  font-size: 20px;
+  background-color: black;
+  border: 1px solid white;
+  color: white;
   padding: 10px 24px;
-}
-
-.sidebar button:hover {
-  border-bottom: 1px solid rgb(248, 193, 2);
 }
 
 .sidebar-hidden {
   display: none;
-}
-
-.menu-links {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 300px;
-}
-
-.logout-button {
-  margin-top: 50vh;
 }
