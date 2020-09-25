@@ -1,0 +1,36 @@
+.products-page-div {
+  height: 640px;
+  width: 360px;
+}
+
+.products-list{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 75px;
+  width: 360px;
+}
+
+.product-card{
+  height: 200px;
+  width: 150px;
+}
+
+.quantity-div{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100px;
+}
+
+.checkout-bottom {
+  align-items: center;
+  background-color: #cce8ed;
+  bottom: 0;
+  display: flex;
+  height: 70px;
+  justify-content: space-between;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  width: 360px;
+}

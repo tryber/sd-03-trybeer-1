@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { errorHandler } = require('./middlewares');
 const routers = require('./routers/index');
+const { errorHandler } = require('./middlewares');
 
 const app = express();
 
@@ -12,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// app.use((req, _res, next) => console.log(req.path, req.body) && next());
 app.use('/login', routers.login);
 
 app.use('/register', routers.register);
