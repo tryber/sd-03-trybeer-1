@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import ProductCard from './ProductCard';
-import ClientMenu from './Menu/ClientMenu';
+import { ClientMenu } from './Menu/index';
 import './ProductsClients.css';
 
 const zero = 0;
