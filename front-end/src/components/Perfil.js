@@ -6,10 +6,11 @@ const handlePerfilChange = async (e, name, setError) => {
   e.preventDefault();
   try {
     const { token } = JSON.parse(localStorage.getItem('user'));
-    const response = await axios.post('http://localhost:3001/profile', {
-      name,
-      token,
-    });
+    const headers = { authorization: token };
+    const response = await axios.post(
+      'http://localhost:3001/profile',
+      { headers, body: { name } },
+    );
     localStorage.setItem('user', JSON.stringify(response.data));
     return setError('');
   } catch (err) {
