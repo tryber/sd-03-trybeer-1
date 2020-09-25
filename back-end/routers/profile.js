@@ -1,9 +1,9 @@
 const express = require('express');
 const rescue = require('express-rescue');
 const { updateUser } = require('../controllers/profileController');
-
+const validateToken = require('../middlewares/validateToken');
 const profile = express.Router();
 
-profile.put('/profile', rescue(updateUser));
+profile.put('/profile', validateToken, rescue(updateUser));
 
 module.exports = profile;
