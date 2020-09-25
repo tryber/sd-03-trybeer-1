@@ -46,13 +46,13 @@ const defineQnt = (p, cart) => {
 };
 
 const ProductCard = (p, index, cart) => {
-  const { product, price, image } = p;
+  const { name, price, image } = p;
   const [qnt, setQnt] = useState(defineQnt(p, cart));
 
   return (
     <div className="product-card">
-      <img src={ image } alt={ product } data-testid={ `${index}-product-img` } />
-      <h3 data-testid={ `${index}-product-name` }>{ product }</h3>
+      <img src={ image } alt={ name } data-testid={ `${index}-product-img` } />
+      <h3 data-testid={ `${index}-product-name` }>{ name }</h3>
       <p data-testid={ `${index}-product-price` }>
         R$
         { ` ${price.toFixed(two).toString().replace('.', ',')}` }
