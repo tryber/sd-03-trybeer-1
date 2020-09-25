@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import menuIcon from '../images/hamburguer-menu.png';
+import menuIcon from '../../images/hamburguer-menu.png';
 import './ClientMenu.css';
 
 const logout = (e, history) => {

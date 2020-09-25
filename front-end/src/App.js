@@ -4,6 +4,7 @@ import './App.css';
 import LoginScreen from './components/Login';
 import ProductsClient from './components/ProductsClient';
 import RegisterScreen from './components/Register';
+import ProfileScreen from './components/Profile';
 import AplicationProvider from './context/ContextAplication';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/login" component={ LoginScreen } />
         <Route exact path="/products" component={ ProductsClient } />
         <Route exact path="/register" component={ RegisterScreen } />
+        <Route exact path="/profile" component={ ProfileScreen } />
       </Switch>
     </AplicationProvider>
   );
