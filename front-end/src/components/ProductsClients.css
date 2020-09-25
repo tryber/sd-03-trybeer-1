@@ -1,13 +1,12 @@
 .products-page-div {
-  height: 640px;
-  width: 360px;
+  height: 100vh;
+  width: 100vw;
 }
 
 .products-list{
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 75px;
-  width: 360px;
 }
 
 .product-card{
@@ -23,7 +22,7 @@
 
 .checkout-bottom {
   align-items: center;
-  background-color: #cce8ed;
+  background-color: white;
   bottom: 0;
   display: flex;
   height: 70px;
