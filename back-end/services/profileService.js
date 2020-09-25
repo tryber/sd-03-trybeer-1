@@ -7,7 +7,6 @@ const updateUser = async (name, email) => {
   }
   await userModel.updateUser(name, email);
   const result = await userModel.getByEmail(email);
-  console.log('result:', result)
   return result;
 };
 
