@@ -4,6 +4,6 @@ const { updateUser } = require('../controllers/profileController');
 const validateToken = require('../middlewares/validateToken');
 const profile = express.Router();
 
-profile.put('/profile', validateToken, rescue(updateUser));
+profile.put('/', validateToken, rescue(updateUser));
 
 module.exports = profile;

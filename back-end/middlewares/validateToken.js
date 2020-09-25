@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken');
 
 const validateToken = (req, _res, next) => {
   const { authorization } = req.headers;
-  console.log(req.headers)
-  console.log(req.body)
   const handleError = (err, decoded) => {
     if (err) return next('token_error');
     return decoded;
