@@ -17,7 +17,6 @@ const getByEmail = async (mail) => {
       return id && password ? { id, email, password, name, role } : null;
     }
     return null;
-
   } catch (err) {
     console.error(err);
     return process.exit(1);
@@ -32,14 +31,13 @@ const registerUser = async ({ name, email, password, role }) => connection()
     .execute());
 
 const updateUser = async ({ name, email }) => connection()
-.then((db) => db
+  .then((db) => db
     .getTable('users')
     .update()
     .set('name', name)
     .where('email = :email')
     .bind('email', email)
-    .execute(),
-);
+    .execute());
 
 module.exports = {
   getByEmail,
