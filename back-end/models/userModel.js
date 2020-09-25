@@ -30,7 +30,17 @@ const registerUser = async ({ name, email, password, role }) => connection()
     .values(name, email, password, role)
     .execute());
 
+const updateUser = async ({ name, email }) => connection()
+  .then((db) => db
+    .getTable('users')
+    .update()
+    .set('name', name)
+    .where('email = :email')
+    .bind('email', email)
+    .execute());
+
 module.exports = {
   getByEmail,
   registerUser,
+  updateUser,
 };
