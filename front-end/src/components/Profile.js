@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
 import { ClientMenu, AdminMenu } from './Menu/index';
+import './Profile.css';
 
 const handlePerfilChange = async (e, name, setError) => {
   e.preventDefault();
