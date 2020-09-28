@@ -21,6 +21,7 @@ const getProductsList = async () => {
 const cartTotal = (cart) => cart.reduce((acc, item) => acc + (item.price * item.quantity), zero);
 
 const ProductsClient = () => {
+  // cart handling based in https://medium.com/javascript-in-plain-english/creating-a-persistent-cart-in-react-f287ed4b4df0
   const user = JSON.parse(localStorage.getItem('user')) || null;
   const localCart = JSON.parse(localStorage.getItem('cart')) || [];
   const [cart, setCart] = useState(localCart);
