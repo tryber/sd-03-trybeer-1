@@ -48,7 +48,9 @@ function Login() {
       {error && <p className="error-message">{ error }</p>}
       <form className="form-login">
         <label htmlFor="email">
-          Email <br/>
+          Email
+          {' '}
+          <br />
           <input
             type="email"
             id="email"
@@ -59,7 +61,9 @@ function Login() {
         </label>
 
         <label htmlFor="password">
-          Password <br/>
+          Password
+          {' '}
+          <br />
           <input
             type="password"
             id="password"
