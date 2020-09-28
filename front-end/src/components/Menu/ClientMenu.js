@@ -22,7 +22,7 @@ function ClientMenu() {
     <div>
       <navbar className="top-menu">
         <button type="button" onClick={ () => sidebarVisibility(sidebar, setSidebar) } className="menu-button">
-          <FontAwesomeIcon icon={ faBars } size="2x" data-testid="top-hamburguer"/>
+          <FontAwesomeIcon icon={ faBars } size="2x" data-testid="top-hamburguer" />
         </button>
         <h1 data-testid="top-title">TryBeer</h1>
         <div />
