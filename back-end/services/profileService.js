@@ -5,8 +5,9 @@ const updateUser = async (name, email) => {
   if (!userExists) {
     return { error: 'user_not_exist' };
   }
-  const result = await userModel.updateUser(name, email);
+  await userModel.updateUser(name, email);
+  const result = await userModel.getByEmail(email);
   return result;
 };
 
-module.exports = { updateUser };
+module.exports = updateUser;

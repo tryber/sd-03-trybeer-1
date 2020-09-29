@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { ContextAplication } from '../context/ContextAplication';
+import './Register.css';
 
 async function submitRegister(e, email, password, name, checkbox, history, setError) {
   e.preventDefault();
@@ -23,7 +24,7 @@ async function submitRegister(e, email, password, name, checkbox, history, setEr
 export default function Register() {
   const {
     setError,
-    error = '',
+    error = ' ',
   } = useContext(ContextAplication);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,21 +47,27 @@ export default function Register() {
   const history = useHistory();
 
   return (
-    <div>
-      <form>
+    <div className="page-register">
+      <form className="form-register">
         <label htmlFor="error">
           <h3 name="error">{ error }</h3>
         </label>
         <label htmlFor="name">
           Nome
+          {' '}
+          <br />
           <input name="name" type="text" value={ name } onChange={ ({ target }) => setName(target.value) } data-testid="signup-name" />
         </label>
         <label htmlFor="email">
           Email
+          {' '}
+          <br />
           <input name="email" type="email" value={ email } onChange={ ({ target }) => setEmail(target.value) } data-testid="signup-email" />
         </label>
         <label htmlFor="password">
           Password
+          {' '}
+          <br />
           <input
             name="password"
             type="password"
@@ -70,8 +77,8 @@ export default function Register() {
           />
         </label>
         <label htmlFor="checkbox">
-          Quero Vender
           <input name="checkbox" type="checkbox" value={ checkbox } onChange={ ({ target }) => setCheckbox(target.value) } data-testid="signup-seller" />
+          Quero Vender
         </label>
         <button
           type="submit"
@@ -80,6 +87,7 @@ export default function Register() {
             (e) => submitRegister(e, email, password, name, checkbox, history, setError, error)
           }
           data-testid="signup-btn"
+          className="button-register"
         >
           Cadastrar
         </button>

@@ -30,7 +30,7 @@ const registerUser = async ({ name, email, password, role }) => connection()
     .values(name, email, password, role)
     .execute());
 
-const updateUser = async ({ name, email }) => connection()
+const updateUser = async (name, email) => connection()
   .then((db) => db
     .getTable('users')
     .update()

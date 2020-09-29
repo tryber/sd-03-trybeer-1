@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { ContextAplication } from '../context/ContextAplication';
+import './Login.css';
 
 const handleSignIn = async (e, email, password, setError, history) => {
   e.preventDefault();
@@ -43,11 +44,13 @@ function Login() {
   }, [email, password]);
 
   return (
-    <div>
-      {error && <h3>{ error }</h3>}
-      <form>
+    <div className="page-login">
+      {error && <p className="error-message">{ error }</p>}
+      <form className="form-login">
         <label htmlFor="email">
           Email
+          {' '}
+          <br />
           <input
             type="email"
             id="email"
@@ -59,6 +62,8 @@ function Login() {
 
         <label htmlFor="password">
           Password
+          {' '}
+          <br />
           <input
             type="password"
             id="password"
@@ -74,11 +79,12 @@ function Login() {
           type="submit"
           onClick={ (event) => handleSignIn(event, email, password, setError, history) }
           data-testid="signin-btn"
+          className="button-login"
         >
           ENTRAR
         </button>
       </form>
-      <Link to="/register"><button type="button" data-testid="no-account-btn">Ainda não tenho conta</button></Link>
+      <Link to="/register"><button type="button" data-testid="no-account-btn" className="register-login">Ainda não tenho conta</button></Link>
     </div>
   );
 }

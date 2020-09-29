@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import menuIcon from '../images/hamburguer-menu.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import './ClientMenu.css';
 
 const logout = (e, history) => {
@@ -20,23 +21,19 @@ function ClientMenu() {
   return (
     <div>
       <navbar className="top-menu">
-        <button type="button" onClick={ () => sidebarVisibility(sidebar, setSidebar) }>
-          <img
-            className="menu-icon"
-            src={ menuIcon }
-            alt="menu icon"
-            data-testid="top-hamburguer"
-          />
+        <button type="button" onClick={ () => sidebarVisibility(sidebar, setSidebar) } className="menu-button">
+          <FontAwesomeIcon icon={ faBars } size="2x" data-testid="top-hamburguer" />
         </button>
         <h1 data-testid="top-title">TryBeer</h1>
+        <div />
       </navbar>
       <aside className={ `${sidebar} side-menu-container` }>
-        <div>
+        <div className="menu-links">
           <Link to="/products" data-testid="side-menu-item-products"><button type="button">Produtos</button></Link>
           <Link to="/orders" data-testid="side-menu-item-my-orders"><button type="button">Meus Pedidos</button></Link>
           <Link to="/profile" data-testid="side-menu-item-my-profile"><button type="button">Meu Perfil</button></Link>
-          <button type="submit" data-testid="side-menu-item-logout" onClick={ (e) => logout(e, history) }>Sair</button>
         </div>
+        <button type="submit" data-testid="side-menu-item-logout" onClick={ (e) => logout(e, history) } className="logout-button">Sair</button>
       </aside>
     </div>
   );

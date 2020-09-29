@@ -14,7 +14,6 @@ const listAllProducts = async () => {
       image: urlImage,
     })));
   if (!products) return null;
-
   return products;
 };
 
