@@ -13,16 +13,16 @@ const config = {
 let schema;
 
 const connection = () => (schema
-    ? Promise.resolve(schema)
-    : mysqlx
-      .getSession(config)
-      .then(async (session) => {
-        schema = await session.getSchema('Trybeer');
-        return schema;
-      })
-      .catch((err) => {
-        console.error(err);
-        process.exit(1);
-      }));
+  ? Promise.resolve(schema)
+  : mysqlx
+    .getSession(config)
+    .then(async (session) => {
+      schema = await session.getSchema('Trybeer');
+      return schema;
+    })
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    }));
 
 module.exports = connection;
