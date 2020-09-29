@@ -47,10 +47,9 @@ const defineQnt = (p, cart) => {
 
 const ProductCard = (p, index, cart) => {
   const { name, price, image } = p;
-  const [qnt, setQnt] = useState(defineQnt(p, cart));
 
   return (
-    <div className="product-card">
+    <div className="product-card" key={`product-${index}`}>
       <img src={ image } alt={ name } data-testid={ `${index}-product-img` } />
       <h3 data-testid={ `${index}-product-name` }>{ name }</h3>
       <p data-testid={ `${index}-product-price` }>

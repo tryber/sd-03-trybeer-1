@@ -53,15 +53,21 @@ export default function Register() {
           <h3 name="error">{ error }</h3>
         </label>
         <label htmlFor="name">
-          Nome <br/>
+          Nome
+          {' '}
+          <br />
           <input name="name" type="text" value={ name } onChange={ ({ target }) => setName(target.value) } data-testid="signup-name" />
         </label>
         <label htmlFor="email">
-          Email <br/>
+          Email
+          {' '}
+          <br />
           <input name="email" type="email" value={ email } onChange={ ({ target }) => setEmail(target.value) } data-testid="signup-email" />
         </label>
         <label htmlFor="password">
-          Password <br/>
+          Password
+          {' '}
+          <br />
           <input
             name="password"
             type="password"
