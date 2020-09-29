@@ -6,7 +6,7 @@ import CheckoutCard from './CheckoutCard';
 import toBRCurrency from '../helpers/currency';
 import totalPrice from '../helpers/reduceCart';
 
-const localCart = JSON.parse(localStorage.getItem('cart')) || [];
+const localCart = JSON.parse(localStorage.getItem('cart'));
 const zero = 0;
 const user = JSON.parse(localStorage.getItem('user')) || null;
 
@@ -33,12 +33,14 @@ async function submitBuy(e, cart, street, streetNumber, setMessage) {
 }
 
 export default function Checkout() {
-  const [cart, setCart] = useState(localCart);
+  const localStorageCart = JSON.parse(localStorage.getItem('cart'));
+
+  const [cart, setCart] = useState(localStorageCart);
   const [disabled, setDisabled] = useState(true);
   const [street, setStreet] = useState('');
   const [streetNumber, setStreetNumber] = useState('');
   const [message, setMessage] = useState('');
-
+  console.log(cart);
   function changeQuantity(id, value) {
     const { copyCart, indexOfItem } = itemIndexAndCopyCart(id);
     copyCart[indexOfItem].quantity = parseInt(value, 10);
@@ -51,36 +53,44 @@ export default function Checkout() {
     copyCart.splice(indexOfItem, 1);
     localStorage.setItem('cart', JSON.stringify(copyCart));
     setCart(copyCart);
+    if (!copyCart.lenght) setMessage('Não há produtos no carrinho');
     target.parentNode.remove();
   }
+  useEffect(() => {
+    if (totalPrice(localStorageCart) <= zero || street.lenght || streetNumber.lenght) setDisabled(true);
+    setDisabled(false);
+  }, [streetNumber, street, localStorageCart]);
 
   useEffect(() => {
-    if (!cart.lenght) setMessage('Não há produtos no carrinho');
-    if (totalPrice(cart) <= zero || street.lenght || streetNumber.lenght) setDisabled(true);
-    setDisabled(false);
-  }, [cart, streetNumber, street]);
+    // if (cart.lenght) setMessage('');
+    if (totalPrice(localCart) <= zero) setMessage('Não há produtos no carrinho');
+  }, [cart]);
 
   return (
     <div>
       { !user && <Redirect to="/login" />}
       <ClientMenu />
-      <h3>Produtos</h3>
-      <h2>{ message }</h2>
-      {cart.map((product, index) => CheckoutCard(product, index, removeItem, changeQuantity))}
-      <h6 data-testid="order-total-value">{toBRCurrency(totalPrice(cart))}</h6>
-      <h3>Endereço</h3>
-      <form>
-        <input type="text" data-testid="checkout-street-input" value={ street } onChange={ ({ target }) => setStreet(target.value) } />
-        <input type="number" data-testid="checkout-house-number-input" min="1" value={ streetNumber } onChange={ ({ target }) => setStreetNumber(target.value) } />
-        <button
-          type="submit"
-          data-testid="checkout-finish-btn"
-          disabled={ disabled }
-          onClick={ (e) => submitBuy(e, cart, street, streetNumber, setMessage) }
-        >
-          Enviar
-        </button>
-      </form>
+      <div style={ { padding: '10vh 20vh' } }>
+        <h3>Produtos</h3>
+        <h2>{ message }</h2>
+        <div>
+          {cart.map((product, index) => CheckoutCard(product, index, removeItem, changeQuantity))}
+        </div>
+        <h6 data-testid="order-total-value">{toBRCurrency(totalPrice(cart))}</h6>
+        <h3>Endereço</h3>
+        <form display="block">
+          <input type="text" data-testid="checkout-street-input" value={ street } onChange={ ({ target }) => setStreet(target.value) } />
+          <input type="number" data-testid="checkout-house-number-input" min="1" value={ streetNumber } onChange={ ({ target }) => setStreetNumber(target.value) } />
+          <button
+            type="submit"
+            data-testid="checkout-finish-btn"
+            disabled={ disabled }
+            onClick={ (e) => submitBuy(e, cart, street, streetNumber, setMessage) }
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
