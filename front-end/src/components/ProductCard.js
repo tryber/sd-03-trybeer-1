@@ -1,8 +1,8 @@
 import React from 'react';
 
 const minusOne = -1;
-const zero = 0;
 const plusOne = 1;
+const zero = 0;
 const two = 2;
 
 const defineQnt = (p, cart) => {
