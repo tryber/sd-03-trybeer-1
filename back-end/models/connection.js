@@ -10,8 +10,9 @@ const config = {
   socketPath: '/var/run/mysqld/mysqld.sock',
 };
 
+let schema;
+
 const connection = () => {
-  let schema;
   return schema
     ? Promise.resolve(schema)
     : mysqlx
