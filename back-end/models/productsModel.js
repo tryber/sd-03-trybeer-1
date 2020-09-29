@@ -7,13 +7,12 @@ const listAllProducts = async () => {
       .select(['id', 'name', 'price', 'url_image'])
       .execute())
     .then((results) => results.fetchAll())
-    .then((results) => {
-      return results.map(([id, name, price, urlImage]) => ({
+    .then((results) => results.map(([id, name, price, urlImage]) => ({
       id,
       name,
       price,
       image: urlImage,
-    }))});
+    })));
   if (!products) return null;
   return products;
 };

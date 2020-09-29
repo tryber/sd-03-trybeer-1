@@ -8,9 +8,9 @@ const getByEmail = async (mail) => {
       .select()
       .where('email = :email')
       .bind('email', mail)
-      .execute()
+      .execute();
     const result = await searchDb.fetchAll()[0];
-    console.log('result:', result)
+    console.log('result:', result);
     if (result) {
       const [id, name, email, password, role] = result;
       console.log(id, name, email, password, role);
@@ -23,21 +23,19 @@ const getByEmail = async (mail) => {
   }
 };
 
-const registerUser = async ({ name, email, password, role }) => connection()
-  .then((db) => db
-    .getTable('users')
-    .insert(['name', 'email', 'password', 'role'])
-    .values(name, email, password, role)
-    .execute());
+const registerUser = async ({ name, email, password, role }) => connection().then((db) => db
+  .getTable('users')
+  .insert(['name', 'email', 'password', 'role'])
+  .values(name, email, password, role)
+  .execute());
 
-const updateUser = async (name, email) => connection()
-  .then((db) => db
-    .getTable('users')
-    .update()
-    .set('name', name)
-    .where('email = :email')
-    .bind('email', email)
-    .execute());
+const updateUser = async (name, email) => connection().then((db) => db
+  .getTable('users')
+  .update()
+  .set('name', name)
+  .where('email = :email')
+  .bind('email', email)
+  .execute());
 
 module.exports = {
   getByEmail,
