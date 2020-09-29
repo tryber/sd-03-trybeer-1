@@ -12,8 +12,7 @@ const config = {
 
 let schema;
 
-const connection = () =>
-  schema
+const connection = () => (schema
     ? Promise.resolve(schema)
     : mysqlx
       .getSession(config)
@@ -24,6 +23,6 @@ const connection = () =>
       .catch((err) => {
         console.error(err);
         process.exit(1);
-      });
+      }));
 
 module.exports = connection;
