@@ -8,7 +8,7 @@ import totalPrice from '../helpers/reduceCart';
 
 // const localCart = JSON.parse(localStorage.getItem('cart'));
 const zero = 0;
-
+const fadeIn = 2000;
 async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
   e.preventDefault();
   const user = JSON.parse(localStorage.getItem('user')) || null;
@@ -19,11 +19,12 @@ async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
       'http://localhost:3001/checkout', { cart, street, streetNumber }, { headers },
     );
     if (!response) throw Error;
-    return setMessage('Compra realizada com sucesso!');
-  } catch (_error) {
-    // return setMessage('Algum Erro aconteceu com sua compra, tente novamente maisa tarde.');
     setMessage('Compra realizada com sucesso!');
-    return setTimeout( () => history.push('/products'), 2000 )
+    return setTimeout(() => history.push('/products'), fadeIn);
+  } catch (_error) {
+    return setMessage('Algum Erro aconteceu com sua compra, tente novamente maisa tarde.');
+    // setMessage('Compra realizada com sucesso!');
+    // return setTimeout( () => history.push('/products'), 2000 )
   }
 }
 
@@ -53,17 +54,16 @@ export default function Checkout() {
   }
 
   useEffect(() => {
-    console.log(street, streetNumber)
     if (totalPrice(localCart || []) <= zero || !street || !streetNumber) return setDisabled(true);
-    setDisabled(false);
+    return setDisabled(false);
   }, [streetNumber, street, localCart]);
 
   useEffect(() => {
     // if (cart.lenght) setMessage('');
     if (totalPrice(localCart || []) <= zero) setMessage('Não há produtos no carrinho');
-  }, [cart]);
+  }, [cart, localCart]);
 
-  return !user ? <Redirect to="/login" /> :  (
+  return !user ? <Redirect to="/login" /> : (
     <div>
       <ClientMenu />
       <div style={ { padding: '10vh 20vh' } }>
@@ -72,7 +72,10 @@ export default function Checkout() {
         <div>
           {cart && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
         </div>
-        <h6 data-testid="order-total-value"> { toBRCurrency(totalPrice(cart)) }</h6>
+        <h6 data-testid="order-total-value">
+          {' '}
+          { toBRCurrency(totalPrice(cart)) }
+        </h6>
         <h3>Endereço</h3>
         <form display="block">
           <input type="text" data-testid="checkout-street-input" value={ street } onChange={ ({ target }) => setStreet(target.value) } />

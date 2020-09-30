@@ -9,7 +9,7 @@ const checkout = async () => connection()
       'id',
       'user_id',
       'total_price',
-      'delevery_address',
+      'delivery_address',
       'delivery_number',
       'sale_date',
       'status',
@@ -48,7 +48,7 @@ const finishOrder = async (
   .insert([
     'user_id',
     'total_price',
-    'delevery_address',
+    'delivery_address',
     'delivery_number',
     'sale_date',
     'status',
