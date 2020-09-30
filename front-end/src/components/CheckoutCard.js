@@ -1,15 +1,15 @@
 import React from 'react';
 import toBRCurrency from '../helpers/currency';
-
+// /* type="text" min="0" */
 export default function card(
   {
-    id, name, price, quantity,
+    name, price, quantity,
   },
-  index, removeItem, changeQuantity,
+  index, removeItem,
 ) {
   return (
     <div>
-      <input type="number" min="0" data-testid={ `${index}-product-qtd-input` } onChange={ ({ target: { value } }) => changeQuantity(id, value) } value={ quantity } />
+      <p data-testid={ `${index}-product-qtd-input` }>{quantity}</p>
       <h6 data-testid={ `${index}-product-name` }>{name}</h6>
       <h6 data-testid={ `${index}-product-total-value` }>{toBRCurrency(quantity * price)}</h6>
       <p data-testid={ `${index}-product-unit-price` }>{`(${toBRCurrency(price)} un)`}</p>

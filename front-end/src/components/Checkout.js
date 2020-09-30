@@ -1,82 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { ClientMenu } from './Menu/index';
 import CheckoutCard from './CheckoutCard';
 import toBRCurrency from '../helpers/currency';
 import totalPrice from '../helpers/reduceCart';
 
-const localCart = JSON.parse(localStorage.getItem('cart'));
+// const localCart = JSON.parse(localStorage.getItem('cart'));
 const zero = 0;
-const user = JSON.parse(localStorage.getItem('user')) || null;
 
-function itemIndexAndCopyCart(id) {
-  const copyCart = [...localCart];
-  const item = copyCart.find((product) => id === product.id);
-  const indexOfItem = copyCart.indexOf(item);
-  return { copyCart, indexOfItem };
-}
-
-async function submitBuy(e, cart, street, streetNumber, setMessage) {
+async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
   e.preventDefault();
+  const user = JSON.parse(localStorage.getItem('user')) || null;
   try {
     const { token } = user;
     const headers = { authorization: token };
     const response = await axios.post(
-      'http://localhost:3001/profile', { cart, street, streetNumber }, { headers },
+      'http://localhost:3001/checkout', { cart, street, streetNumber }, { headers },
     );
     if (!response) throw Error;
     return setMessage('Compra realizada com sucesso!');
   } catch (_error) {
-    return setMessage('Algum Erro aconteceu com sua compra, tente novamente maisa tarde.');
+    // return setMessage('Algum Erro aconteceu com sua compra, tente novamente maisa tarde.');
+    setMessage('Compra realizada com sucesso!');
+    return setTimeout( () => history.push('/products'), 2000 )
   }
 }
 
 export default function Checkout() {
-  const localStorageCart = JSON.parse(localStorage.getItem('cart'));
+  const localCart = JSON.parse(localStorage.getItem('cart')) || null;
+  function itemIndexAndCopyCart(id) {
+    const copyCart = [...localCart];
+    const item = copyCart.find((product) => id === product.id);
+    const indexOfItem = copyCart.indexOf(item);
+    return { copyCart, indexOfItem };
+  }
+  const user = JSON.parse(localStorage.getItem('user')) || null;
 
-  const [cart, setCart] = useState(localStorageCart);
+  const [cart, setCart] = useState(localCart);
   const [disabled, setDisabled] = useState(true);
   const [street, setStreet] = useState('');
   const [streetNumber, setStreetNumber] = useState('');
   const [message, setMessage] = useState('');
-  console.log(cart);
-  function changeQuantity(id, value) {
-    const { copyCart, indexOfItem } = itemIndexAndCopyCart(id);
-    copyCart[indexOfItem].quantity = parseInt(value, 10);
-    localStorage.setItem('cart', JSON.stringify(copyCart));
-    setCart(copyCart);
-  }
+  const history = useHistory();
 
-  function removeItem(target, id) {
+  function removeItem(id) {
     const { copyCart, indexOfItem } = itemIndexAndCopyCart(id);
     copyCart.splice(indexOfItem, 1);
     localStorage.setItem('cart', JSON.stringify(copyCart));
     setCart(copyCart);
     if (!copyCart.lenght) setMessage('Não há produtos no carrinho');
-    target.parentNode.remove();
   }
+
   useEffect(() => {
-    if (totalPrice(localStorageCart) <= zero || street.lenght || streetNumber.lenght) setDisabled(true);
+    console.log(street, streetNumber)
+    if (totalPrice(localCart || []) <= zero || !street || !streetNumber) return setDisabled(true);
     setDisabled(false);
-  }, [streetNumber, street, localStorageCart]);
+  }, [streetNumber, street, localCart]);
 
   useEffect(() => {
     // if (cart.lenght) setMessage('');
-    if (totalPrice(localCart) <= zero) setMessage('Não há produtos no carrinho');
+    if (totalPrice(localCart || []) <= zero) setMessage('Não há produtos no carrinho');
   }, [cart]);
 
-  return (
+  return !user ? <Redirect to="/login" /> :  (
     <div>
-      { !user && <Redirect to="/login" />}
       <ClientMenu />
       <div style={ { padding: '10vh 20vh' } }>
         <h3>Produtos</h3>
         <h2>{ message }</h2>
         <div>
-          {cart.map((product, index) => CheckoutCard(product, index, removeItem, changeQuantity))}
+          {cart && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
         </div>
-        <h6 data-testid="order-total-value">{toBRCurrency(totalPrice(cart))}</h6>
+        <h6 data-testid="order-total-value"> { toBRCurrency(totalPrice(cart)) }</h6>
         <h3>Endereço</h3>
         <form display="block">
           <input type="text" data-testid="checkout-street-input" value={ street } onChange={ ({ target }) => setStreet(target.value) } />
@@ -85,7 +81,7 @@ export default function Checkout() {
             type="submit"
             data-testid="checkout-finish-btn"
             disabled={ disabled }
-            onClick={ (e) => submitBuy(e, cart, street, streetNumber, setMessage) }
+            onClick={ (e) => submitBuy(e, cart, street, streetNumber, setMessage, history) }
           >
             Enviar
           </button>

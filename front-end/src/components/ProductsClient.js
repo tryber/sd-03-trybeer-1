@@ -29,7 +29,10 @@ const ProductsClient = () => {
   const editItem = (itemID, amount) => {
     const cartCopy = [...cart];
     const existentItem = cartCopy.find((item) => item.id === itemID);
+    // existentItem.quantity = parseInt(existentItem.quantity);
     existentItem.quantity += amount;
+    // existentItem.quantity = existentItem.quantity.toString();
+    // console.log('existentItem.quantity:', existentItem.quantity)
 
     if (existentItem.quantity <= zero) {
       const indexOfItem = cartCopy.indexOf(existentItem.id === itemID);
