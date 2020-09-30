@@ -8,7 +8,7 @@ import totalPrice from '../helpers/reduceCart';
 
 // const localCart = JSON.parse(localStorage.getItem('cart'));
 const zero = 0;
-const fadeIn = 2000;
+const fadeIn = 2500;
 async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
   e.preventDefault();
   const user = JSON.parse(localStorage.getItem('user')) || null;
@@ -23,8 +23,6 @@ async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
     return setTimeout(() => history.push('/products'), fadeIn);
   } catch (_error) {
     return setMessage('Algum Erro aconteceu com sua compra, tente novamente maisa tarde.');
-    // setMessage('Compra realizada com sucesso!');
-    // return setTimeout( () => history.push('/products'), 2000 )
   }
 }
 
