@@ -6,6 +6,6 @@ const validateToken = require('../middlewares/validateToken');
 
 const checkout = express.Router();
 
-checkout.get('/', validateToken, rescue(finishSalesController));
+checkout.post('/', validateToken, rescue(finishSalesController));
 
 module.exports = checkout;
