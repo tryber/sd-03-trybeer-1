@@ -21,7 +21,7 @@ app.use('/profile', routers.profile);
 
 app.use('/products', routers.products);
 
-app.use('/checkout', route.checkout);
+app.use('/checkout', routers.checkout);
 
 app.use(errorHandler);
 app.listen(3001, console.log(`listen on port ${3001}`));
