@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import AdminMenu from './Menu/AdminMenu';
+import { ContextAplication } from '../context/ContextAplication';
 import './AdminOrders.css';
 
 const two = 2;
@@ -40,7 +41,7 @@ const getOrdersList = async () => {
 
 function AdminOrders() {
   const user = JSON.parse(localStorage.getItem('user')) || null;
-  const [orders, setOrders] = useState([]);
+  const { orders, setOrders } = useContext(ContextAplication);
 
   const getData = async () => {
     try {
