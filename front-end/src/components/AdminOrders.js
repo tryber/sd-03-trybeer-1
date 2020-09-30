@@ -63,21 +63,21 @@ function AdminOrders() {
       <AdminMenu />
       <div className="orders-list">
         {orders.map((o, index) => (
-          <Link to={ `/admin/orders/${o.id}` } key={ o.id }>
-            <div className="order-card">
+          <Link to={ `/admin/orders/${o.id}` } key={ o.id } className="order-card">
+            <div>
               <p data-testid={ `${index}-order-number` }>
                 Pedido
-                {o.id}
+                {` ${o.id}`}
               </p>
               <p data-testid={ `${index}-order-address` }>
-                {' '}
-                {o.address}
+                Endereço:
+                {` ${o.address}`}
               </p>
               <p data-testid={ `${index}-order-total-value` }>
                 R$
                 {` ${o.total.toFixed(two).toString().replace('.', ',')}`}
               </p>
-              <p data-testid={ `${index}-order-status` }>
+              <p data-testid={ `${index}-order-status` } className="order-status">
                 {' '}
                 {o.status}
               </p>

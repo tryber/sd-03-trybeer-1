@@ -1,0 +1,21 @@
+.details-div h1 {
+  margin: 0;
+}
+
+.details-div {
+  height: 100vh;
+  margin-left: 250px;
+  width: 100vw;
+}
+
+.admin-details-list {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+}
+
+.admin-details-div {
+  display: flex;
+  justify-content: space-evenly;
+  width: 300px;
+}
