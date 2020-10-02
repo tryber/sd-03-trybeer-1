@@ -8,7 +8,7 @@ import totalPrice from '../helpers/reduceCart';
 
 // const localCart = JSON.parse(localStorage.getItem('cart'));
 const zero = 0;
-const fadeIn = 2500;
+const fadeIn = 3500;
 async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
   e.preventDefault();
   const user = JSON.parse(localStorage.getItem('user')) || null;
