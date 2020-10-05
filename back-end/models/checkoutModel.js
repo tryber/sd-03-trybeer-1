@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const getAllSales = async () => connection()
+const getSaleByUserId = async (userId) => connection()
   .then((db) => db
     .getTable('sales')
     .select([
@@ -12,6 +12,8 @@ const getAllSales = async () => connection()
       'sale_date',
       'status',
     ])
+    .where('user_id =: userId')
+    .bind('userId', userId)
     .execute())
   .then((results) => results.fetchAll())
   .then((results) => results.map(
@@ -62,6 +64,6 @@ const checkout = async (
   .execute());
 
 module.exports = {
-  getAllSales,
+  getSaleByUserId,
   checkout,
 };
