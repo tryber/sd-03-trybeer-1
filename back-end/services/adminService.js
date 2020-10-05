@@ -10,6 +10,7 @@ const getAll = async () => {
 
 const updateSale = async (id, status) => {
   const update = await updateSaleById(id, status);
+  console.log('S', update);
   return update;
 }
 

@@ -20,6 +20,7 @@ const getAllSales = async () => {
 
 const updateSaleById = async (saleId, status) => {
   try {
+    console.log('M', status)
     connection()
       .then((db) => db
         .getTable('sales')

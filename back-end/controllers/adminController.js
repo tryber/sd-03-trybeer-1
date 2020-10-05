@@ -14,7 +14,7 @@ const updateSaleById = async (req, res, next) => {
 
   const response = await updateSale(id, status);
 
-  if (response.error) return next(response.error);
+  if (response) return next(response.error);
 
   return res.status(200).json(response);
 }
