@@ -20,7 +20,7 @@ function App() {
         <Route exact path="/profile" component={ ProfileScreen } />
         <Route exact path="/admin/orders" component={ AdminOrders } />
         <Route exact path="/admin/profile" component={ ProfileScreen } />
-        <Route exact path="/admin/orders/:id" render={ (props) => <AdminDetails props={ props } /> } />
+        <Route exact path="/admin/orders/:id" component={ AdminDetails } />
       </Switch>
     </AplicationProvider>
   );

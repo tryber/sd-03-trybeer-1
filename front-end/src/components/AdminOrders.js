@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import AdminMenu from './Menu/AdminMenu';
 import { ContextAplication } from '../context/ContextAplication';
@@ -14,23 +14,28 @@ const getOrdersList = async () => {
   return orders;
 };
 
-function AdminOrders() {
-  const user = JSON.parse(localStorage.getItem('user')) || null;
-  const { orders, setOrders } = useContext(ContextAplication);
+const redirectToDetails = (id, setId, history) => {
+  setId(id);
+  history.push(`/admin/orders/${id}`);
+};
 
-  const getData = async () => {
-    try {
-      const data = await getOrdersList() || [];
-      setOrders(data);
-    } catch (e) {
-      return e;
-    }
-    return false;
-  };
+const AdminOrders = () => {
+  const user = JSON.parse(localStorage.getItem('user')) || null;
+  const { orders, setOrders, setId } = useContext(ContextAplication);
+  const history = useHistory();
 
   useEffect(() => {
-    getData();
-  }, []);
+    async function fetchData() {
+      try {
+        const data = await getOrdersList() || [];
+        setOrders(data);
+      } catch (e) {
+        return e;
+      }
+      return false;
+    }
+    fetchData();
+  }, [setOrders]);
 
   return (
     <div>
@@ -38,29 +43,27 @@ function AdminOrders() {
       <AdminMenu />
       <div className="orders-list">
         {orders.map((o, index) => (
-          <Link to={ `/admin/orders/${o.saleId}` } key={ o.saleId }>
-            <div className="order-card">
-              <p data-testid={ `${index}-order-number` }>
-                Pedido
-                {o.saleId}
-              </p>
-              <p data-testid={ `${index}-order-address` }>
-                {' '}
-                {`${o.address}, ${o.number}`}
-              </p>
-              <p data-testid={ `${index}-order-total-value` }>
-                R$
-                {` ${o.total.toFixed(two).toString().replace('.', ',')}`}
-              </p>
-              <p data-testid={ `${index}-order-status` }>
-                {' '}
-                {o.status}
-              </p>
-            </div>
-          </Link>))}
+          <button type="button" className="order-card" onClick={ () => redirectToDetails(o.saleId, setId, history) } key={ o.saleId }>
+            <p data-testid={ `${index}-order-number` }>
+              Pedido
+              {o.saleId}
+            </p>
+            <p data-testid={ `${index}-order-address` }>
+              {' '}
+              {`${o.address}, ${o.number}`}
+            </p>
+            <p data-testid={ `${index}-order-total-value` }>
+              R$
+              {` ${o.total.toFixed(two).toString().replace('.', ',')}`}
+            </p>
+            <p data-testid={ `${index}-order-status` }>
+              {' '}
+              {o.status}
+            </p>
+          </button>))}
       </div>
     </div>
   );
-}
+};
 
 export default AdminOrders;

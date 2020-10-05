@@ -20,24 +20,22 @@ const changeStatus = async (id, order, setOrder) => {
   setOrder(newOrder);
 };
 
-function AdminDetails(props) {
-  const { id } = props.props.match.params;
-  const { order, setOrder } = useContext(ContextAplication);
+const AdminDetails = () => {
+  const { order, setOrder, id } = useContext(ContextAplication);
   const user = JSON.parse(localStorage.getItem('user')) || null;
 
-  const getData = async () => {
-    try {
-      const data = await getOrder(id) || [];
-      setOrder(data);
-    } catch (e) {
-      return e;
-    }
-    return false;
-  };
-
   useEffect(() => {
-    getData();
-  }, []);
+    async function fetchData() {
+      try {
+        const data = await getOrder(id) || [];
+        setOrder(data);
+      } catch (e) {
+        return e;
+      }
+      return false;
+    }
+    fetchData();
+  }, [id, setOrder]);
 
   return (
     <div>
@@ -67,6 +65,6 @@ function AdminDetails(props) {
       { order.status === 'Pendente' && <button onClick={ () => changeStatus(id, order, setOrder) } type="button">Marcar como entregue</button>}
     </div>
   );
-}
+};
 
 export default AdminDetails;
