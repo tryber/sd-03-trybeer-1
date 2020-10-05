@@ -11,7 +11,7 @@ const orderMock = {
   date: 'hoje',
   cart: [
     {
-      name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2
+      name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2,
     },
     // {
     //   name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,

@@ -17,7 +17,7 @@ const orderMock = [
     date: new Date().toLocaleDateString('pt-BR'),
     cart: [
       {
-        name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2
+        name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2,
       },
       // {
       //   name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,
@@ -40,13 +40,13 @@ const getOrders = async (setOrders, setMessage) => {
     setOrders(response.data);
     return setMessage('Atualização concluída com sucesso');
   } catch (err) {
-    console.log(orderMock[1].cart)
+    // console.log(orderMock[1].cart);
     return setOrders(orderMock[1].cart);
     // return setMessage('Algum erro aconteceu');
   }
 };
 
-const orderCard = (index, { date, totalPrice = 2.20, id }) => {
+const orderCard = (index, { date, totalPrice, id }) => {
   const startingOrderNumber = 1;
   return (
     <Link to={ `/orders/${id}` }>
@@ -74,7 +74,7 @@ export default function Orders() {
     if (!lastStorage || !lastStorage.token) history.push('/login');
     // if (!orders || !orders.length) getOrders(setOrders, setMessage);
   }, [lastStorage, orders, history, setMessage]);
-  useEffect(() => { getOrders(setOrders, setMessage) }, []);
+  useEffect(() => { getOrders(setOrders, setMessage); }, []);
 
   return (
     <div>
