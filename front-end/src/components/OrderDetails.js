@@ -59,7 +59,7 @@ export default function Checkout() {
   const { id } = useParams();
 
   useEffect(() => {
-    if (!order.length) getOrder(id, setMessage, setOrder);
+    if (!order || !order.length) getOrder(id, setMessage, setOrder);
   }, [order, id]);
 
   return !user ? <Redirect to="/login" /> : (

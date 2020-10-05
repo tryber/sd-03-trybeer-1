@@ -71,7 +71,7 @@ export default function Orders() {
   useEffect(() => {
     console.log(orders);
     if (!lastStorage || !lastStorage.token) history.push('/login');
-    if (!orders.length) getOrders(setOrders, setMessage);
+    if (!orders || !orders.length) getOrders(setOrders, setMessage);
   }, [lastStorage, orders, history, setMessage]);
 
   return (
@@ -79,7 +79,7 @@ export default function Orders() {
       {role === 'admin' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meus Pedidos</h1>
       {message && <h3>{message}</h3>}
-      <div>{orders.map((order, index) => orderCard(index, order))}</div>
+      <div>{orders && orders.map((order, index) => orderCard(index, order))}</div>
     </div>
   );
 }
