@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 import AdminMenu from './Menu/AdminMenu';
 import { ContextAplication } from '../context/ContextAplication';
 import './AdminOrders.css';
-import axios from 'axios';
 
 const two = 2;
 

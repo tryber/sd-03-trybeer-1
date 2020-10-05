@@ -20,7 +20,7 @@ const getAllSales = async () => {
 
 const updateSaleById = async (saleId, status) => {
   try {
-    console.log('M', status)
+    console.log('M', status);
     connection()
       .then((db) => db
         .getTable('sales')
@@ -34,26 +34,23 @@ const updateSaleById = async (saleId, status) => {
   }
 };
 
-const getSaleInfo = async(saleId) =>
-  connection()
-    .then((db) =>
-      db
-        .getTable('sales')
-        .select(['id', 'user_id', 'total_price', 'delivery_address', 'delivery_number', 'sale_date', 'status'])
-        .where('id = :id')
-        .bind('id', saleId)
-        .execute(),
-    )
-    .then((results) => results.fetchAll()[0])
-    .then(([id, userID, totalPrice, deliveryAddress, deliveryNumber, saleDate, status] = []) => (id ? {
-      saleId: id,
-      userId: userID,
-      total: totalPrice,
-      address: deliveryAddress,
-      number: deliveryNumber,
-      saleDate /* : new Date(saleDate).toISOString() */,
-      status,
-    } : null));
+const getSaleInfo = async (saleId) => connection()
+  .then((db) => db
+    .getTable('sales')
+    .select(['id', 'user_id', 'total_price', 'delivery_address', 'delivery_number', 'sale_date', 'status'])
+    .where('id = :id')
+    .bind('id', saleId)
+    .execute())
+  .then((results) => results.fetchAll()[0])
+  .then(([id, userID, totalPrice, deliveryAddress, deliveryNumber, saleDate, status]) => (id ? {
+    saleId: id,
+    userId: userID,
+    total: totalPrice,
+    address: deliveryAddress,
+    number: deliveryNumber,
+    saleDate /* : new Date(saleDate).toISOString() */,
+    status,
+  } : null));
 
 const getSale = async (saleId) => {
   try {

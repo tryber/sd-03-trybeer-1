@@ -8,7 +8,7 @@ const AplicationProvider = ({ children }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [orders, setOrders] = useState([]);
-  const [order, setOrder] = useState({saleProducts:[]});
+  const [order, setOrder] = useState({ saleProducts: [] });
 
   const context = {
     email,

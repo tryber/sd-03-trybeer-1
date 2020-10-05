@@ -1,4 +1,4 @@
-const { connection }= require('./connection');
+const { connection } = require('./connection');
 
 const getByEmail = async (mail) => {
   try {

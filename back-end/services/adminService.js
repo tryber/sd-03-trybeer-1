@@ -12,7 +12,7 @@ const updateSale = async (id, status) => {
   const update = await updateSaleById(id, status);
   console.log('S', update);
   return update;
-}
+};
 
 const getSaleById = async (id) => {
   const sale = await getSaleInfo(id);
@@ -22,7 +22,7 @@ const getSaleById = async (id) => {
   }
 
   const saleProducts = await getSale(id);
-  const fullSale = { ...sale, saleProducts};
+  const fullSale = { ...sale, saleProducts };
 
   return fullSale;
 };
