@@ -9,6 +9,8 @@ import CheckoutScreen from './components/Checkout';
 import OrdersScreen from './components/Orders';
 import OrderDetailsScreen from './components/OrderDetails';
 import AplicationProvider from './context/ContextAplication';
+import AdminOrders from './components/AdminOrders';
+import AdminDetails from './components/AdminDetails';
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         <Route exact path="/orders/:id" component={ OrderDetailsScreen } />
         <Route exact path="/orders" component={ OrdersScreen } />
         <Route exact path="/checkout" component={ CheckoutScreen } />
+        <Route exact path="/admin/orders" component={ AdminOrders } />
+        <Route exact path="/admin/profile" component={ ProfileScreen } />
+        <Route exact path="/admin/orders/:id" component={ AdminDetails } />
       </Switch>
     </AplicationProvider>
   );

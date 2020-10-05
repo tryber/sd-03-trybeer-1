@@ -21,6 +21,8 @@ app.use('/profile', routers.profile);
 
 app.use('/products', routers.products);
 
+app.use('/admin', routers.admin);
+
 app.use('/checkout', routers.checkout);
 
 app.use(errorHandler);

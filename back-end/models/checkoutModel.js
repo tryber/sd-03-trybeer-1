@@ -1,4 +1,4 @@
-const connection = require('./connection');
+const { connection } = require('./connection');
 
 const getSaleByUserId = async (userId) => connection()
   .then((db) => db

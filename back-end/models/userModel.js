@@ -1,4 +1,4 @@
-const connection = require('./connection');
+const { connection } = require('./connection');
 
 const getByEmail = async (mail) => {
   try {
@@ -16,7 +16,6 @@ const getByEmail = async (mail) => {
     }
     return null;
   } catch (err) {
-    console.error(err);
     return process.exit(1);
   }
 };
