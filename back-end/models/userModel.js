@@ -10,10 +10,8 @@ const getByEmail = async (mail) => {
       .bind('email', mail)
       .execute();
     const result = await searchDb.fetchAll()[0];
-    console.log('result:', result);
     if (result) {
       const [id, name, email, password, role] = result;
-      console.log(id, name, email, password, role);
       return id && password ? { id, email, password, name, role } : null;
     }
     return null;
