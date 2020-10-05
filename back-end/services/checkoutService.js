@@ -9,6 +9,7 @@ const finishSale = async (user, order) => {
   const timeStamp = new Date();
   const total = cartTotal(cart);
   const sales = await checkoutModel.checkout(
+
     user.id,
     total,
     street,

@@ -1,5 +1,3 @@
-// const { values } = require('sequelize/types/lib/operators');
-
 const connection = require('./connection');
 
 const getAllSales = async () => connection()
