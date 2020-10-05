@@ -19,7 +19,7 @@ async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
       'http://localhost:3001/checkout', { cart, street, streetNumber }, { headers },
     );
     if (!response) throw Error;
-    setMessage('Compra realizada com sucesso!');
+    await setMessage('Compra realizada com sucesso!');
     return setTimeout(() => history.push('/products'), fadeOut);
   } catch (_error) {
     return setMessage('Algum Erro aconteceu com sua compra, tente novamente mais tarde.');
