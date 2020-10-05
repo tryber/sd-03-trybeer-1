@@ -21,5 +21,7 @@ app.use('/profile', routers.profile);
 
 app.use('/products', routers.products);
 
+app.use('/admin', routers.admin);
+
 app.use(errorHandler);
 app.listen(3001, console.log(`listen on port ${3001}`));

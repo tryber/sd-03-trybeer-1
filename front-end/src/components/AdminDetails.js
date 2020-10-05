@@ -1,12 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import AdminMenu from './Menu/AdminMenu';
 import { ContextAplication } from '../context/ContextAplication';
+import axios from 'axios';
 
 const filterOrder = (id, orders) => {
   const orderSelected = orders.filter((order) => parseInt(order.id, 10) === parseInt(id, 10));
   return orderSelected[0];
 };
+
+const getOrder = async (id) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const response = await axios.get(`http://localhost:3001/admin/orders/${id}`, { headers: { authorization: token } });
+  return response.data;
+}
 
 const changeStatus = (order, orders, setOrders) => {
   let ordersUpdate = orders.reduce((acc, o) => {
@@ -18,11 +25,24 @@ const changeStatus = (order, orders, setOrders) => {
   setOrders(ordersUpdate);
 };
 
-function AdminDetails(props) {
+async function AdminDetails(props) {
   const { id } = props.props.match.params;
-  const { orders, setOrders } = useContext(ContextAplication);
+  const { orders, setOrders, order, setOrder } = useContext(ContextAplication);
   const user = JSON.parse(localStorage.getItem('user')) || null;
-  const order = filterOrder(id, orders) || [];
+
+  const getData = async () => {
+    try {
+      const data = await getOrder(id) || [];
+      setOrder(data);
+    } catch (e) {
+      return e;
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div>
@@ -30,16 +50,16 @@ function AdminDetails(props) {
       <AdminMenu />
       <h1>
         Pedido
-        { order.id }
+        { order.saleId }
         {' '}
         -
         { order.status }
       </h1>
-      { order.products.map((p) => (<div key={ p.id }>
-        <p>{ p.qnt }</p>
-        <p>{ p.name }</p>
-        <p>{ `R$ ${p.price * p.qnt}` }</p>
-        <p>{ `(R$ ${p.price})` }</p>
+      { order.saleProducts.map((p) => (<div key={ p.soldProductId }>
+        <p>{ p.soldQuantity }</p>
+        <p>{ p.productName }</p>
+        <p>{ `R$ ${p.productPrice * p.soldQuantity}` }</p>
+        <p>{ `(R$ ${p.productPrice})` }</p>
       </div>)) }
       <h3>
         Total:

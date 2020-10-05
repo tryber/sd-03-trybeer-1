@@ -3,38 +3,13 @@ import { Link, Redirect } from 'react-router-dom';
 import AdminMenu from './Menu/AdminMenu';
 import { ContextAplication } from '../context/ContextAplication';
 import './AdminOrders.css';
+import axios from 'axios';
 
 const two = 2;
 
-const apiCall = () => ({
-  data: [{
-    id: 1,
-    user: 1,
-    address: 'Rua 1, numero 2',
-    products: [{
-      id: 1, name: 'Skol Lata 250ml', price: 2.20, qnt: 2,
-    }, {
-      id: 4, name: 'Brahma 600ml', price: 7.50, qnt: 4,
-    }],
-    total: 34.40,
-    status: 'Pendente',
-  }, {
-    id: 2,
-    user: 2,
-    address: 'Rua 4A, numero 5',
-    products: [{
-      id: 1, name: 'Skol Lata 250ml', price: 2.20, qnt: 10,
-    }, {
-      id: 4, name: 'Brahma 600ml', price: 7.50, qnt: 5,
-    }],
-    total: 59.50,
-    status: 'Entregue',
-  }],
-});
-
 const getOrdersList = async () => {
-  // const { token } = JSON.parse(localStorage.getItem('user'));
-  const response = await apiCall();
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const response = await axios.get('http://localhost:3001/admin/orders', { headers: { authorization: token } });
   const orders = response.data;
   return orders;
 };
@@ -63,15 +38,15 @@ function AdminOrders() {
       <AdminMenu />
       <div className="orders-list">
         {orders.map((o, index) => (
-          <Link to={ `/admin/orders/${o.id}` } key={ o.id }>
+          <Link to={ `/admin/orders/${o.saleId}` } key={ o.saleId }>
             <div className="order-card">
               <p data-testid={ `${index}-order-number` }>
                 Pedido
-                {o.id}
+                {o.saleId}
               </p>
               <p data-testid={ `${index}-order-address` }>
                 {' '}
-                {o.address}
+                {`${o.address}, ${o.number}`}
               </p>
               <p data-testid={ `${index}-order-total-value` }>
                 R$
