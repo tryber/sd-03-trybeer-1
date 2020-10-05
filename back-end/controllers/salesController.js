@@ -1,4 +1,4 @@
-const { getAll, updateSale, getSaleById } = require('../services/adminService');
+const { getAll, updateSale, getSaleById, finishSale, getSaleByUserId } = require('../services/salesService');
 
 const listAllSales = async (_req, res, next) => {
   const response = await getAll();
@@ -29,8 +29,24 @@ const getSale = async (req, res, next) => {
   return res.status(200).json(response);
 };
 
+const finishSalesController = async (req, res) => {
+  const sales = await finishSale(req.user, req.body);
+  console.log(sales);
+  return res.status(200).json(sales);
+};
+
+const getSaleByUser = async (req, res, next) => {
+  const sale = await getSaleByUserId(req.user.id);
+  console.log(sale);
+  if (sale.error) return next(sale.error);
+
+  return res.status(200).json(sale);
+};
+
 module.exports = {
+  finishSalesController,
   listAllSales,
   updateSaleById,
   getSale,
+  getSaleByUser,
 };

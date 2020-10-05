@@ -23,6 +23,8 @@ app.use('/products', routers.products);
 
 app.use('/admin', routers.admin);
 
+app.use('/orders', routers.orders);
+
 app.use('/checkout', routers.checkout);
 
 app.use(errorHandler);

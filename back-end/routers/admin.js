@@ -1,7 +1,7 @@
 const express = require('express');
 const rescue = require('express-rescue');
 
-const { listAllSales, updateSaleById, getSale } = require('../controllers/adminController');
+const { listAllSales, updateSaleById, getSale } = require('../controllers/salesController');
 const validateToken = require('../middlewares/validateToken');
 
 const admin = express.Router();
