@@ -41,28 +41,30 @@ const AdminDetails = () => {
     <div>
       { user === null && <Redirect to="/login" />}
       <AdminMenu />
-      <h1>
+      <h1 data-testid="order-number">
         Pedido
         {' '}
         { order.saleId }
         {' '}
         -
+      </h1>
+      <h1 data-testid="order-status">
         {' '}
         { order.status }
       </h1>
-      { order.saleProducts.map((p) => (
+      { order.saleProducts.map((p, index) => (
         <div key={ p.soldProductId }>
-          <p>{ p.soldQuantity }</p>
-          <p>{ p.productName }</p>
-          <p>{ `R$ ${currency(p.productPrice * p.soldQuantity)}` }</p>
-          <p>{ `(R$ ${currency(p.productPrice)})` }</p>
+          <p data-testid={ `${index}-product-qtd` }>{ p.soldQuantity }</p>
+          <p data-testid={ `${index}-product-name` }>{ p.productName }</p>
+          <p data-testid={ `${index}-product-total-value` }>{ `R$ ${currency(p.productPrice * p.soldQuantity)}` }</p>
+          <p data-testid={ `${index}-order-unit-price` }>{ `(R$ ${currency(p.productPrice)})` }</p>
         </div>)) }
-      <h3>
+      <h3 data-testid="order-total-value">
         Total:
         {' '}
         { `R$ ${order.total}` }
       </h3>
-      { order.status === 'Pendente' && <button onClick={ () => changeStatus(id, order, setOrder) } type="button">Marcar como entregue</button>}
+      { order.status === 'Pendente' && <button onClick={ () => changeStatus(id, order, setOrder) } type="button" data-testid="mark-as-delivered-btn">Marcar como entregue</button>}
     </div>
   );
 };
