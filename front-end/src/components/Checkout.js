@@ -60,10 +60,6 @@ export default function Checkout() {
     if (totalPrice(localCart || []) <= zero) setMessage('Não há produtos no carrinho');
   }, [cart, localCart]);
 
-  useEffect(() => {
-
-  }, [message])
-
   return !user ? <Redirect to="/login" /> : (
     <div>
       <ClientMenu />

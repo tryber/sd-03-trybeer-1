@@ -14,14 +14,14 @@ const orderMock = [
   {
     id: 2,
     totalPrice: 20,
-    date: 'hoje',
+    date: new Date().toLocaleDateString('pt-BR'),
     cart: [
       {
-        name: 'litrão', price: 7, id: 7, quantity: 2,
+        name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2
       },
-      {
-        name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,
-      },
+      // {
+      //   name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,
+      // },
     ],
   },
 ];
@@ -40,18 +40,19 @@ const getOrders = async (setOrders, setMessage) => {
     setOrders(response.data);
     return setMessage('Atualização concluída com sucesso');
   } catch (err) {
-    return setOrders(orderMock.cart);
+    console.log(orderMock[1].cart)
+    return setOrders(orderMock[1].cart);
     // return setMessage('Algum erro aconteceu');
   }
 };
 
-const orderCard = (index, { date, totalPrice, id }) => {
+const orderCard = (index, { date, totalPrice = 2.20, id }) => {
   const startingOrderNumber = 1;
   return (
     <Link to={ `/orders/${id}` }>
       <div data-testid={ `${index}-order-container` }>
         <h3 data-testid={ `${index}-order-number` }>
-          {index + startingOrderNumber}
+          {`Pedido ${index + startingOrderNumber}`}
         </h3>
         <h4 data-testid={ `${index}-order-date` }>{date}</h4>
         <h4 data-testid={ `${index}-order-value` }>{toBRCurrency(totalPrice)}</h4>
@@ -71,15 +72,16 @@ export default function Orders() {
   useEffect(() => {
     console.log(orders);
     if (!lastStorage || !lastStorage.token) history.push('/login');
-    if (!orders || !orders.length) getOrders(setOrders, setMessage);
+    // if (!orders || !orders.length) getOrders(setOrders, setMessage);
   }, [lastStorage, orders, history, setMessage]);
+  useEffect(() => { getOrders(setOrders, setMessage) }, []);
 
   return (
     <div>
       {role === 'admin' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meus Pedidos</h1>
       {message && <h3>{message}</h3>}
-      <div>{orders && orders.map((order, index) => orderCard(index, order))}</div>
+      <div>{orders && orders.length && orders.map((order, index) => orderCard(index, order))}</div>
     </div>
   );
 }

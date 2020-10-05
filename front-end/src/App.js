@@ -19,8 +19,8 @@ function App() {
         <Route exact path="/products" component={ ProductsClient } />
         <Route exact path="/register" component={ RegisterScreen } />
         <Route exact path="/profile" component={ ProfileScreen } />
-        <Route exact path="/orders" component={ OrdersScreen } />
         <Route exact path="/orders/:id" component={ OrderDetailsScreen } />
+        <Route exact path="/orders" component={ OrdersScreen } />
         <Route exact path="/checkout" component={ CheckoutScreen } />
       </Switch>
     </AplicationProvider>

@@ -11,11 +11,11 @@ const orderMock = {
   date: 'hoje',
   cart: [
     {
-      name: 'litrão', price: 7, id: 7, quantity: 2,
+      name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2
     },
-    {
-      name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,
-    },
+    // {
+    //   name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,
+    // },
   ],
 };
 
@@ -26,13 +26,13 @@ async function getOrder(id, setMessage, setOrder) {
     const { token } = user;
     const headers = { authorization: token };
     const response = await axios.post(
-      `http://localhost:3001/orders${id}`, { headers },
+      `http://localhost:3001/orders/${id}`, { headers },
     );
     if (!response) throw Error;
     return setOrder(response.data);
   } catch (_error) {
     setOrder(orderMock.cart);
-    return setMessage('Algum Erro aconteceu com seus pedidos, tente novamente maisa tarde.');
+    return setMessage('Algum Erro aconteceu com seus pedidos, tente novamente mais tarde.');
   }
 }
 
