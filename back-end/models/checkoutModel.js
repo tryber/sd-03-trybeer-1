@@ -2,7 +2,7 @@
 
 const connection = require('./connection');
 
-const checkout = async () => connection()
+const getAllSales = async () => connection()
   .then((db) => db
     .getTable('sales')
     .select([
@@ -36,7 +36,7 @@ const checkout = async () => connection()
     }),
   ));
 
-const finishOrder = async (
+const checkout = async (
   id,
   totalPrice,
   deliveryAddress,
@@ -64,6 +64,6 @@ const finishOrder = async (
   .execute());
 
 module.exports = {
+  getAllSales,
   checkout,
-  finishOrder,
 };
