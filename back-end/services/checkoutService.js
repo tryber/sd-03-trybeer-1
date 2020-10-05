@@ -8,15 +8,15 @@ const finishSale = async (user, order) => {
   const { cart, street, streetNumber } = order;
   const timeStamp = new Date();
   const total = cartTotal(cart);
-  const sales = await checkoutModel.finishOrder(
+  const sales = await checkoutModel.checkout(
+
     user.id,
     total,
     street,
     streetNumber,
-    timeStamp.toLocaleDateString(),
+    timeStamp.toLocaleDateString('pt-BR'),
     'Pending',
   );
-
   return sales;
 };
 

@@ -34,7 +34,7 @@ const getAllSales = async () => connection()
     }),
   ));
 
-const finishOrder = async (
+const checkout = async (
   id,
   totalPrice,
   deliveryAddress,
@@ -63,5 +63,5 @@ const finishOrder = async (
 
 module.exports = {
   getAllSales,
-  finishOrder,
+  checkout,
 };
