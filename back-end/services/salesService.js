@@ -1,4 +1,11 @@
-const { getAllSales, updateSaleById, getSale, getSaleInfo, checkout, getSaleByUserId } = require('../models/salesModel');
+const {
+  getAllSales,
+  updateSaleById,
+  getSale,
+  getSaleInfo,
+  checkout,
+  getSaleByUserId,
+} = require('../models/salesModel');
 
 const getAll = async () => {
   const sales = await getAllSales();
@@ -26,7 +33,7 @@ const getSaleById = async (id) => {
 };
 
 function cartTotal(cart) {
-  return cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 }
 
 const finishSale = async (user, order) => {
@@ -38,7 +45,8 @@ const finishSale = async (user, order) => {
     total,
     street,
     streetNumber,
-    timeStamp.toISOString().replace('Z','').replace('T', ' '),
+    timeStamp.toISOString().replace('Z', '')
+      .replace('T', ' '),
     'Pendente',
   );
   return sales;
