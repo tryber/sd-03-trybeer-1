@@ -10,6 +10,7 @@ const AplicationProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
   const [order, setOrder] = useState({ saleProducts: [] });
   const [id, setId] = useState('');
+  const [contextMessage, setContextMessage] = useState('');
 
   const context = {
     email,
@@ -24,6 +25,8 @@ const AplicationProvider = ({ children }) => {
     setOrder,
     id,
     setId,
+    contextMessage,
+    setContextMessage,
   };
 
   return (

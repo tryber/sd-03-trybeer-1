@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { ContextAplication } from '../context/ContextAplication';
 import ProductCard from './ProductCard';
 import { ClientMenu } from './Menu/index';
 import './ProductsClients.css';
@@ -61,6 +62,7 @@ const ProductsClient = () => {
     const stringCart = JSON.stringify(cartCopy);
     return localStorage.setItem('cart', stringCart);
   };
+  const { contextMessage } = useContext(ContextAplication);
 
   const [products, setProducts] = useState([]);
   const getData = async () => {
@@ -79,6 +81,7 @@ const ProductsClient = () => {
 
   return (
     <div className="products-page-div">
+      { contextMessage }
       { user === null && <Redirect to="/login" />}
       <ClientMenu />
       <div className="products-list">

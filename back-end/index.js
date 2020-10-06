@@ -10,16 +10,16 @@ const app = express();
 
 app.use(cors());
 
-app.use((req, res, next) => {
-  if (req.path.includes('/images')) {
-    const parsePath = req.url.replace(/%20/g, ' ');
-    console.log('req.url:', req.url);
-    req.path = parsePath;
-    console.log(req.path);
-  }
-  next();
-});
-app.use(express.static(path.join(__dirname, 'images')));
+// app.use((req, res, next) => {
+//   if(req.path.includes('/images')){
+//     const parsePath = req.url.replace(/%20/g, ' ');
+//     console.log('req.url:', req.url)
+//     req.path = parsePath;
+//     console.log(req.path)
+//   }
+//   next()
+// })
+app.use('/images', express.static(`${process.cwd()}/images`));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

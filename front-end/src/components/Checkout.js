@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { ContextAplication } from '../context/ContextAplication';
 import { ClientMenu } from './Menu/index';
 import CheckoutCard from './CheckoutCard';
 import toBRCurrency from '../helpers/currency';
@@ -8,7 +9,6 @@ import totalPrice from '../helpers/reduceCart';
 
 // const localCart = JSON.parse(localStorage.getItem('cart'));
 const zero = 0;
-const fadeOut = 5000;
 async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
   e.preventDefault();
   const user = JSON.parse(localStorage.getItem('user')) || null;
@@ -20,7 +20,7 @@ async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
     );
     if (!response) throw Error;
     await setMessage('Compra realizada com sucesso!');
-    return setTimeout(() => history.push('/products'), fadeOut);
+    return history.push('/products');
   } catch (_error) {
     return setMessage('Algum Erro aconteceu com sua compra, tente novamente mais tarde.');
   }
@@ -42,6 +42,7 @@ export default function Checkout() {
   const [streetNumber, setStreetNumber] = useState('');
   const [message, setMessage] = useState('');
   const history = useHistory();
+  const { setContextMessage } = useContext(ContextAplication);
 
   function removeItem(id) {
     const { copyCart, indexOfItem } = itemIndexAndCopyCart(id);
@@ -81,7 +82,7 @@ export default function Checkout() {
             type="submit"
             data-testid="checkout-finish-btn"
             disabled={ disabled }
-            onClick={ (e) => submitBuy(e, cart, street, streetNumber, setMessage, history) }
+            onClick={ (e) => submitBuy(e, cart, street, streetNumber, setContextMessage, history) }
           >
             Enviar
           </button>

@@ -20,7 +20,7 @@ const getOrders = async (setOrders, setMessage) => {
   }
 };
 
-const orderCard = (index, { date, totalPrice, id }) => {
+const orderCard = (index, { saleDate, totalPrice, id }) => {
   const startingOrderNumber = 1;
   return (
     <Link to={ `/orders/${id}` }>
@@ -28,8 +28,8 @@ const orderCard = (index, { date, totalPrice, id }) => {
         <h3 data-testid={ `${index}-order-number` }>
           {`Pedido ${index + startingOrderNumber}`}
         </h3>
-        <h4 data-testid={ `${index}-order-date` }>{date}</h4>
-        <h4 data-testid={ `${index}-order-value` }>{toBRCurrency(totalPrice)}</h4>
+        <h4 data-testid={ `${index}-order-date` }>{new Date(saleDate).toLocaleDateString('pt-BR')}</h4>
+        <h4 data-testid={ `${index}-order-total-value` }>{toBRCurrency(totalPrice)}</h4>
       </div>
     </Link>
   );
