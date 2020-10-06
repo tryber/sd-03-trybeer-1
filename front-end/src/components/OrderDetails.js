@@ -54,8 +54,10 @@ export default function Checkout() {
       <div style={ { padding: '10vh 20vh' } }>
         <h3 data-testid="top-title">Detalhes de Pedido</h3>
         <h2>{ message }</h2>
+        <h4 data-testid="order-number">{ order.number }</h4>
         <div>
-          {order.length && order.map((product, index) => productRow(product, index))}
+          {console.log(order)}
+          {order.salesProducts.length && order.salesProducts.map((product, index) => productRow(product, index))}
         </div>
         <h6 data-testid="order-total-value">
           Total:
