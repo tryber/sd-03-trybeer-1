@@ -7,7 +7,6 @@ import toBRCurrency from '../helpers/currency';
 async function getOrder(id, setMessage, setOrder) {
   const user = JSON.parse(localStorage.getItem('user')) || null;
   try {
-    console.log('mae to na globo');
     const { token } = user;
     const headers = { authorization: token };
     const response = await axios.get(
@@ -46,7 +45,6 @@ export default function Checkout() {
   useEffect(() => {
     if (!order) getOrder(id, setMessage, setOrder);
   }, [order, id]);
-  console.log(order);
   if (!user) return <Redirect to="/login" />;
   return order && (
     <div>

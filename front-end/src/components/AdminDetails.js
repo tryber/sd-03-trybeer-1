@@ -8,7 +8,8 @@ import currency from '../helpers/currency';
 const getOrder = async (id) => {
   const { token } = JSON.parse(localStorage.getItem('user'));
   const response = await axios.get(`http://localhost:3001/admin/orders/${id}`, { headers: { authorization: token } });
-  return response.data;
+  const answer = { ...response.data, total: currency(response.data.total) };
+  return answer;
 };
 
 const changeStatus = async (id, order, setOrder) => {
@@ -56,13 +57,13 @@ const AdminDetails = () => {
         <div key={ p.soldProductId }>
           <p data-testid={ `${index}-product-qtd` }>{ p.soldQuantity }</p>
           <p data-testid={ `${index}-product-name` }>{ p.productName }</p>
-          <p data-testid={ `${index}-product-total-value` }>{ `R$ ${currency(p.productPrice * p.soldQuantity)}` }</p>
-          <p data-testid={ `${index}-order-unit-price` }>{ `(R$ ${currency(p.productPrice)})` }</p>
+          <p data-testid={ `${index}-product-total-value` }>{ currency(p.productPrice * p.soldQuantity) }</p>
+          <p data-testid={ `${index}-order-unit-price` }>{ `(${currency(p.productPrice)})` }</p>
         </div>)) }
       <h3 data-testid="order-total-value">
         Total:
         {' '}
-        { `R$ ${order.total}` }
+        { order.total }
       </h3>
       { order.status === 'Pendente' && <button onClick={ () => changeStatus(id, order, setOrder) } type="button" data-testid="mark-as-delivered-btn">Marcar como entregue</button>}
     </div>

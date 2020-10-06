@@ -5,6 +5,7 @@ const errors = {
   token_error: { message: 'Invalid token ', status: 401 },
   no_sales: { message: 'No sales found', status: 404 },
   invalid_id: { message: 'Invalid id', status: 401 },
+  internal_error: { message: 'Internal error', status: 500 },
 };
 
 function makeError(err) {

@@ -44,7 +44,6 @@ export default function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    console.log(orders);
     if (!lastStorage || !lastStorage.token) history.push('/login');
     // if (!orders || !orders.length) getOrders(setOrders, setMessage);
   }, [lastStorage, orders, history, setMessage]);

@@ -60,6 +60,7 @@ const getSale = async (saleId) => {
     const searchQuery = await sqlConnection(joinQuery);
 
     const results = await searchQuery.fetchAll();
+    console.log('R', results);
     const salesResults = results.reduce(
       (acc, [
         id,
@@ -137,7 +138,19 @@ const checkout = async (
     saleDate,
     status,
   )
-  .execute());
+  .execute())
+  .then((result) => result.getAutoIncrementValue());
+
+const insertSaleProduct = async (id, cart) => {
+  const db = await connection();
+  await Promise.all(cart.map(async (product) => {
+    await db.getTable('sales_products')
+      .insert(['sale_id', 'product_id', 'quantity'])
+      .values([id, product.id, product.quantity])
+      .execute()
+      .then((result) => console.log(result));
+  }));
+};
 
 module.exports = {
   getSaleByUserId,
@@ -146,4 +159,5 @@ module.exports = {
   updateSaleById,
   getSale,
   getSaleInfo,
+  insertSaleProduct,
 };
