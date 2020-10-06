@@ -38,7 +38,7 @@ const finishSale = async (user, order) => {
     total,
     street,
     streetNumber,
-    timeStamp.toLocaleDateString('pt-BR'),
+    timeStamp.toISOString().replace('Z','').replace('T', ' '),
     'Pendente',
   );
   return sales;

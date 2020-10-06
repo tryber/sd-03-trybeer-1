@@ -46,6 +46,7 @@ const AdminOrders = () => {
           <button type="button" className="order-card" onClick={ () => redirectToDetails(o.saleId, setId, history) } key={ o.saleId }>
             <p data-testid={ `${index}-order-number` }>
               Pedido
+              {' '}
               {o.saleId}
             </p>
             <p data-testid={ `${index}-order-address` }>

@@ -81,9 +81,9 @@ const ProductsClient = () => {
 
   return (
     <div className="products-page-div">
-      { contextMessage }
       { user === null && <Redirect to="/login" />}
       <ClientMenu />
+      { contextMessage }
       <div className="products-list">
         {products.length && products.map((p, index) => ProductCard(p, index, cart, addItem))}
       </div>
