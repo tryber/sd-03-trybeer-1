@@ -21,9 +21,8 @@ const updateSaleById = async (req, res, next) => {
 
 const getSale = async (req, res, next) => {
   const { id } = req.params;
-
+  console.log(id);
   const response = await getSaleById(id);
-
   if (response.error) return next(response.error);
 
   return res.status(200).json(response);
@@ -36,6 +35,7 @@ const finishSalesController = async (req, res) => {
 };
 
 const getSaleByUser = async (req, res, next) => {
+  console.log('req.user.id:', req.user);
   const sale = await getSaleByUserId(req.user.id);
   console.log(sale);
   if (sale.error) return next(sale.error);

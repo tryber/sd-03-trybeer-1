@@ -88,11 +88,11 @@ const getSaleByUserId = async (userID) => connection()
   .then((db) => db
     .getTable('sales')
     .select()
-    .where('user_id =: userId')
+    .where('user_id = :userId')
     .bind('userId', userID)
     .execute())
   .then((results) => results.fetchAll())
-  .then((results) => results.map(
+  .then((results) => console.log(results) || results.map(
     ([
       id,
       userId,

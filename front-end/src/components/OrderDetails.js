@@ -3,21 +3,6 @@ import { Redirect, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ClientMenu } from './Menu/index';
 import toBRCurrency from '../helpers/currency';
-import totalPrice from '../helpers/reduceCart';
-
-const orderMock = {
-  id: 2,
-  totalPrice: 20,
-  date: 'hoje',
-  cart: [
-    {
-      name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2,
-    },
-    // {
-    //   name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,
-    // },
-  ],
-};
 
 async function getOrder(id, setMessage, setOrder) {
   const user = JSON.parse(localStorage.getItem('user')) || null;
@@ -25,13 +10,13 @@ async function getOrder(id, setMessage, setOrder) {
     console.log('mae to na globo');
     const { token } = user;
     const headers = { authorization: token };
-    const response = await axios.post(
+    const response = await axios.get(
       `http://localhost:3001/orders/${id}`, { headers },
     );
     if (!response) throw Error;
     return setOrder(response.data);
   } catch (_error) {
-    setOrder(orderMock.cart);
+    // setOrder(orderMock.cart);
     return setMessage('Algum Erro aconteceu com seus pedidos, tente novamente mais tarde.');
   }
 }
@@ -55,14 +40,15 @@ export default function Checkout() {
   const user = JSON.parse(localStorage.getItem('user')) || null;
 
   const [message, setMessage] = useState('');
-  const [order, setOrder] = useState([]);
+  const [order, setOrder] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
-    if (!order || !order.length) getOrder(id, setMessage, setOrder);
+    if (!order) getOrder(id, setMessage, setOrder);
   }, [order, id]);
-
-  return !user ? <Redirect to="/login" /> : (
+  console.log(order);
+  if (!user) return <Redirect to="/login" />;
+  return order && (
     <div>
       <ClientMenu />
       <div style={ { padding: '10vh 20vh' } }>
@@ -74,7 +60,7 @@ export default function Checkout() {
         <h6 data-testid="order-total-value">
           Total:
           {' '}
-          { toBRCurrency(totalPrice(orderMock.cart)) }
+          { toBRCurrency(order.total) }
         </h6>
       </div>
     </div>

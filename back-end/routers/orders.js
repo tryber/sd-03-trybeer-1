@@ -6,8 +6,7 @@ const validateToken = require('../middlewares/validateToken');
 
 const orders = express.Router();
 
-orders.get('/', validateToken, rescue(getSaleByUser));
-
 orders.get('/:id', validateToken, rescue(getSale));
+orders.get('/', validateToken, rescue(getSaleByUser));
 
 module.exports = orders;

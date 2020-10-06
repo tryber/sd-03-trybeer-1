@@ -4,31 +4,8 @@ import { useHistory, Link } from 'react-router-dom';
 import { ClientMenu, AdminMenu } from './Menu/index';
 import toBRCurrency from '../helpers/currency';
 
-const orderMock = [
-  {
-    id: 1,
-    totalPrice: 20,
-    date: 'hoje',
-    cart: [{ name: 'litrão', price: 7, id: 7 }],
-  },
-  {
-    id: 2,
-    totalPrice: 20,
-    date: new Date().toLocaleDateString('pt-BR'),
-    cart: [
-      {
-        name: 'Skol Lata 250ml', price: 2.20, id: 7, quantity: 2,
-      },
-      // {
-      //   name: 'mandioquinha firta', id: 2, price: 14, quantity: 1,
-      // },
-    ],
-  },
-];
-
 const getOrders = async (setOrders, setMessage) => {
   try {
-    console.log('to pegando mãe');
     const lastStorage = JSON.parse(localStorage.getItem('user'));
     const { token } = lastStorage;
     const headers = { authorization: token };
@@ -37,12 +14,9 @@ const getOrders = async (setOrders, setMessage) => {
     });
     if (!response) throw Error;
     if (!response.data) return setMessage('Não há pedidos');
-    setOrders(response.data);
-    return setMessage('Atualização concluída com sucesso');
+    return setOrders(response.data);
   } catch (err) {
-    // console.log(orderMock[1].cart);
-    return setOrders(orderMock[1].cart);
-    // return setMessage('Algum erro aconteceu');
+    return setMessage('Algum erro aconteceu');
   }
 };
 
