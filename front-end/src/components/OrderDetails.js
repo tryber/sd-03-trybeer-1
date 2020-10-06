@@ -7,7 +7,6 @@ import toBRCurrency from '../helpers/currency';
 async function getOrder(id, setMessage, setOrder) {
   const user = JSON.parse(localStorage.getItem('user')) || null;
   try {
-    console.log('mae to na globo');
     const { token } = user;
     const headers = { authorization: token };
     const response = await axios.get(
@@ -46,7 +45,6 @@ export default function Checkout() {
   useEffect(() => {
     if (!order) getOrder(id, setMessage, setOrder);
   }, [order, id]);
-  console.log(order);
   if (!user) return <Redirect to="/login" />;
   return order && (
     <div>
@@ -56,8 +54,7 @@ export default function Checkout() {
         <h2>{ message }</h2>
         <h4 data-testid="order-number">{ order.number }</h4>
         <div>
-          {console.log(order)}
-          {order.salesProducts.length && order.salesProducts.map((product, index) => productRow(product, index))}
+          {order.salesProducts.map((product, index) => productRow(product, index))}
         </div>
         <h6 data-testid="order-total-value">
           Total:

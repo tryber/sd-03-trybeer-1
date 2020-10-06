@@ -1,11 +1,4 @@
-const {
-  getAllSales,
-  updateSaleById,
-  getSale,
-  getSaleInfo,
-  checkout,
-  getSaleByUserId,
-} = require('../models/salesModel');
+const { getAllSales, updateSaleById, getSale, getSaleInfo, checkout, getSaleByUserId, insertSaleProduct } = require('../models/salesModel');
 
 const getAll = async () => {
   const sales = await getAllSales();
@@ -37,19 +30,24 @@ function cartTotal(cart) {
 }
 
 const finishSale = async (user, order) => {
-  const { cart, street, streetNumber } = order;
-  const timeStamp = new Date();
-  const total = cartTotal(cart);
-  const sales = await checkout(
-    user.id,
-    total,
-    street,
-    streetNumber,
-    timeStamp.toISOString().replace('Z', '')
-      .replace('T', ' '),
-    'Pendente',
-  );
-  return sales;
+  try {
+    const { cart, street, streetNumber } = order;
+    const timeStamp = new Date();
+    const total = cartTotal(cart);
+    const saleId = await checkout(
+      user.id,
+      total,
+      street,
+      streetNumber,
+      timeStamp.toISOString().replace('Z', '')
+        .replace('T', ' '),
+      'Pendente',
+    );
+    console.log(saleId);
+    if (saleId) await insertSaleProduct(saleId, cart);
+  } catch (e) {
+    return { error: 'internal_error' };
+  }
 };
 
 const getSaleByUser = async (id) => {

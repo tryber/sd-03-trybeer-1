@@ -20,6 +20,7 @@ async function submitBuy(e, cart, street, streetNumber, setMessage, history) {
     );
     if (!response) throw Error;
     await setMessage('Compra realizada com sucesso!');
+    localStorage.removeItem('cart');
     return history.push('/products');
   } catch (_error) {
     return setMessage('Algum Erro aconteceu com sua compra, tente novamente mais tarde.');
