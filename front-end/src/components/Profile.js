@@ -58,25 +58,47 @@ function Profile() {
       <form>
         <label htmlFor="email">
           Email
-          <input
-            type="email"
-            id="email"
-            value={ email }
-            data-testid="profile-email-input"
-            readOnly
-          />
+          { role === 'administrator'
+            ? (
+              <p
+                type="email"
+                id="email"
+                data-testid="profile-email"
+                readOnly
+              >
+                { email }
+              </p>
+            )
+            : (<input
+              type="email"
+              id="email"
+              value={ email }
+              data-testid="profile-email-input"
+              readOnly
+            />)}
         </label>
 
         <label htmlFor="name">
           Name
-          <input
-            type="name"
-            id="name"
-            value={ name }
-            onChange={ (event) => setName(event.target.value) }
-            required
-            data-testid="profile-name-input"
-          />
+          { role === 'administrator'
+            ? (
+              <p
+                type="name"
+                id="name"
+                data-testid="profile-name"
+              >
+                {' '}
+                {name}
+              </p>
+            )
+            : <input
+              type="name"
+              id="name"
+              value={ name }
+              onChange={ (event) => setName(event.target.value) }
+              required
+              data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
+            />}
         </label>
 
         <button

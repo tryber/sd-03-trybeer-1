@@ -8,7 +8,7 @@ export default function card(
   index, removeItem,
 ) {
   return (
-    <div>
+    <div key={ name }>
       <p data-testid={ `${index}-product-qtd-input` }>{quantity}</p>
       <h6 data-testid={ `${index}-product-name` }>{name}</h6>
       <h6 data-testid={ `${index}-product-total-value` }>{toBRCurrency(quantity * price)}</h6>

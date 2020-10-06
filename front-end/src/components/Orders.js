@@ -23,7 +23,7 @@ const getOrders = async (setOrders, setMessage) => {
 const orderCard = (index, { saleDate, totalPrice, id }) => {
   const startingOrderNumber = 1;
   return (
-    <Link to={ `/orders/${id}` }>
+    <Link to={ `/orders/${id}` } key={ `order-${index}` }>
       <div data-testid={ `${index}-order-container` }>
         <h3 data-testid={ `${index}-order-number` }>
           {`Pedido ${index + startingOrderNumber}`}
@@ -54,7 +54,7 @@ export default function Orders() {
       {role === 'admin' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meus Pedidos</h1>
       {message && <h3>{message}</h3>}
-      <div>{orders && orders.length && orders.map((order, index) => orderCard(index, order))}</div>
+      <div>{orders && orders.map((order, index) => orderCard(index, order))}</div>
     </div>
   );
 }

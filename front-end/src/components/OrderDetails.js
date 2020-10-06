@@ -22,15 +22,15 @@ async function getOrder(id, setMessage, setOrder) {
 
 function productRow(
   {
-    name, price, quantity,
+    productName, productPrice, soldQuantity,
   },
   index,
 ) {
   return (
-    <div>
-      <p data-testid={ `${index}-product-qtd` }>{quantity}</p>
-      <h6 data-testid={ `${index}-product-name` }>{name}</h6>
-      <h6 data-testid={ `${index}-product-total-value` }>{toBRCurrency(quantity * price)}</h6>
+    <div key={ productName }>
+      <p data-testid={ `${index}-product-qtd` }>{soldQuantity}</p>
+      <h6 data-testid={ `${index}-product-name` }>{productName}</h6>
+      <h6 data-testid={ `${index}-product-total-value` }>{toBRCurrency(soldQuantity * productPrice)}</h6>
     </div>
   );
 }
@@ -46,20 +46,29 @@ export default function Checkout() {
     if (!order) getOrder(id, setMessage, setOrder);
   }, [order, id]);
   if (!user) return <Redirect to="/login" />;
-  return order && (
+  return (
     <div>
       <ClientMenu />
       <div style={ { padding: '10vh 20vh' } }>
         <h3 data-testid="top-title">Detalhes de Pedido</h3>
         <h2>{ message }</h2>
-        <h4 data-testid="order-number">{ order.number }</h4>
+        <h4 data-testid="order-number">
+          Pedido
+          {' '}
+          { order.saleId }
+        </h4>
         <div>
-          {order.salesProducts.map((product, index) => productRow(product, index))}
+          {order.saleProducts.map((product, index) => productRow(product, index))}
         </div>
+        <h4 data-testid="order-date">
+          {' '}
+          {new Date(order.saleDate).toLocaleDateString('pt-BR')}
+          {' '}
+        </h4>
         <h6 data-testid="order-total-value">
           Total:
           {' '}
-          { toBRCurrency(order.total) }
+          { order.total && toBRCurrency(order.total) }
         </h6>
       </div>
     </div>
