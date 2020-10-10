@@ -52,7 +52,7 @@ function Profile() {
 
   return (
     <div>
-      {role === 'admin' ? <AdminMenu /> : <ClientMenu />}
+      {role === 'administrator' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meu perfil</h1>
       {error && <h3>{ error }</h3>}
       <form>

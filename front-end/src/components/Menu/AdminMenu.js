@@ -11,9 +11,9 @@ const logout = (e, history) => {
 function AdminMenu() {
   const history = useHistory();
   return (
-    <aside className="admin-side-bar-container">
+    <aside className="admin-side-bar-container menu-admin">
       <h1>Trybeer</h1>
-      <div>
+      <div className="menu-admin-links">
         <Link to="/admin/orders" data-testid="side-menu-item-orders"><button type="button">Pedidos</button></Link>
         <Link to="/admin/profile" data-testid="side-menu-item-profile"><button type="button">Perfil</button></Link>
         <button type="submit" data-testid="side-menu-item-logout" onClick={ (e) => logout(e, history) }>Sair</button>

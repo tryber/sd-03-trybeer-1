@@ -6,6 +6,8 @@ import ProductsClient from './components/ProductsClient';
 import RegisterScreen from './components/Register';
 import ProfileScreen from './components/Profile';
 import AplicationProvider from './context/ContextAplication';
+import AdminOrders from './components/AdminOrders';
+import AdminDetails from './components/AdminDetails';
 
 function App() {
   return (
@@ -16,6 +18,9 @@ function App() {
         <Route exact path="/products" component={ ProductsClient } />
         <Route exact path="/register" component={ RegisterScreen } />
         <Route exact path="/profile" component={ ProfileScreen } />
+        <Route exact path="/admin/orders" component={ AdminOrders } />
+        <Route exact path="/admin/profile" component={ ProfileScreen } />
+        <Route exact path="/admin/orders/:id" render={ (props) => <AdminDetails props={ props } /> } />
       </Switch>
     </AplicationProvider>
   );

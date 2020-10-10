@@ -45,7 +45,7 @@ const ProductsClient = () => {
 
   const addItem = (item, qnt) => {
     const cartCopy = [...cart];
-    const { id, price } = item;
+    const { id, price, name } = item;
     const existingItem = cartCopy.some((cartItem) => cartItem.id === id);
 
     if (existingItem) {
@@ -54,7 +54,9 @@ const ProductsClient = () => {
 
     if (qnt === minusOne) return false;
 
-    cartCopy.push({ id, price, quantity: 1 });
+    cartCopy.push({
+      id, price, quantity: 1, name,
+    });
     setCart(cartCopy);
 
     const stringCart = JSON.stringify(cartCopy);
