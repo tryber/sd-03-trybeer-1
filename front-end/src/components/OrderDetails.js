@@ -59,8 +59,8 @@ export default function Checkout() {
         </h4>
         <div>
           {
-            order.saleProducts && 
-            order.saleProducts.map((product, index) => productRow(product, index))
+            order.saleProducts
+            && order.saleProducts.map((product, index) => productRow(product, index))
           }
         </div>
         <h4 data-testid="order-date">
