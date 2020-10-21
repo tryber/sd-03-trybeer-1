@@ -1,6 +1,7 @@
 const loginService = require('../services/loginService');
 
 const loginController = async (req, res, next) => {
+  console.log(req.body)
   const { email, password } = req.body;
   const response = await loginService(email, password);
 

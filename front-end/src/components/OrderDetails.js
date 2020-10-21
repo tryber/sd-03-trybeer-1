@@ -58,7 +58,10 @@ export default function Checkout() {
           { order.saleId }
         </h4>
         <div>
-          {order.saleProducts.map((product, index) => productRow(product, index))}
+          {
+            order.saleProducts && 
+            order.saleProducts.map((product, index) => productRow(product, index))
+          }
         </div>
         <h4 data-testid="order-date">
           {' '}

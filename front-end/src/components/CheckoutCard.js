@@ -1,5 +1,6 @@
 import React from 'react';
 import toBRCurrency from '../helpers/currency';
+import './CheckoutCard.css';
 // /* type="text" min="0" */
 export default function card(
   {
@@ -8,7 +9,7 @@ export default function card(
   index, removeItem,
 ) {
   return (
-    <div key={ name }>
+    <div key={ name } className="card">
       <p data-testid={ `${index}-product-qtd-input` }>{quantity}</p>
       <h6 data-testid={ `${index}-product-name` }>{name}</h6>
       <h6 data-testid={ `${index}-product-total-value` }>{toBRCurrency(quantity * price)}</h6>

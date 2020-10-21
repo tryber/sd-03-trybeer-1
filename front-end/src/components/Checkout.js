@@ -6,6 +6,7 @@ import { ClientMenu } from './Menu/index';
 import CheckoutCard from './CheckoutCard';
 import toBRCurrency from '../helpers/currency';
 import totalPrice from '../helpers/reduceCart';
+import './Checkout.css';
 
 // const localCart = JSON.parse(localStorage.getItem('cart'));
 const zero = 0;
@@ -65,7 +66,7 @@ export default function Checkout() {
   return !user ? <Redirect to="/login" /> : (
     <div>
       <ClientMenu />
-      <div style={ { padding: '10vh 20vh' } }>
+      <div style={ { padding: '5vh 10vw' } }>
         <h3>Produtos</h3>
         <h2>{ message }</h2>
         <div>
@@ -76,9 +77,15 @@ export default function Checkout() {
           { toBRCurrency(totalPrice(cart)) }
         </h6>
         <h3>Endereço</h3>
-        <form display="block">
-          <input type="text" data-testid="checkout-street-input" value={ street } onChange={ ({ target }) => setStreet(target.value) } />
-          <input type="number" data-testid="checkout-house-number-input" min="1" value={ streetNumber } onChange={ ({ target }) => setStreetNumber(target.value) } />
+        <form display="block" className="form">
+          <label htmlFor="street">
+            Rua
+            <input name="street" type="text" data-testid="checkout-street-input" value={ street } onChange={ ({ target }) => setStreet(target.value) } />
+          </label>
+          <label htmlFor="number">
+            Número
+            <input type="number" name="number" data-testid="checkout-house-number-input" min="1" value={ streetNumber } onChange={ ({ target }) => setStreetNumber(target.value) } />
+          </label>
           <button
             type="submit"
             data-testid="checkout-finish-btn"
