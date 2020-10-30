@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { ContextAplication } from '../context/ContextAplication';
 import ProductCard from './ProductCard';
 import { ClientMenu } from './Menu/index';
 import './ProductsClients.css';
+import cartTotal from '../helpers/reduceCart';
+import toBRCurrency from '../helpers/currency';
 
 const zero = 0;
-const two = 2;
 const plusOne = 1;
 const minusOne = -1;
 
@@ -17,8 +19,6 @@ const getProductsList = async () => {
   const products = response.data;
   return products;
 };
-
-const cartTotal = (cart) => cart.reduce((acc, item) => acc + (item.price * item.quantity), zero);
 
 const ProductsClient = () => {
   // cart handling based in https://medium.com/javascript-in-plain-english/creating-a-persistent-cart-in-react-f287ed4b4df0
@@ -45,7 +45,7 @@ const ProductsClient = () => {
 
   const addItem = (item, qnt) => {
     const cartCopy = [...cart];
-    const { id, price } = item;
+    const { id, price, name } = item;
     const existingItem = cartCopy.some((cartItem) => cartItem.id === id);
 
     if (existingItem) {
@@ -54,12 +54,15 @@ const ProductsClient = () => {
 
     if (qnt === minusOne) return false;
 
-    cartCopy.push({ id, price, quantity: 1 });
+    cartCopy.push({
+      id, price, quantity: 1, name,
+    });
     setCart(cartCopy);
 
     const stringCart = JSON.stringify(cartCopy);
     return localStorage.setItem('cart', stringCart);
   };
+  const { contextMessage } = useContext(ContextAplication);
 
   const [products, setProducts] = useState([]);
   const getData = async () => {
@@ -80,14 +83,14 @@ const ProductsClient = () => {
     <div className="products-page-div">
       { user === null && <Redirect to="/login" />}
       <ClientMenu />
+      { contextMessage }
       <div className="products-list">
-        {products.map((p, index) => ProductCard(p, index, cart, addItem))}
+        {products.length && products.map((p, index) => ProductCard(p, index, cart, addItem))}
       </div>
       <div className="checkout-bottom">
         <Link to="/checkout"><button type="button" data-testid="checkout-bottom-btn" disabled={ disabled }>Ver Carrinho</button></Link>
         <p data-testid="checkout-bottom-btn-value">
-          R$
-          {` ${cartTotal(cart).toFixed(two).toString().replace('.', ',')}`}
+          {toBRCurrency(cartTotal(cart))}
         </p>
       </div>
     </div>

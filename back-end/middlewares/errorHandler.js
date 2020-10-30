@@ -3,6 +3,9 @@ const errors = {
   email_in_use: { message: 'Email already exists ', status: 409 },
   user_not_exist: { message: 'User not found', status: 404 },
   token_error: { message: 'Invalid token ', status: 401 },
+  no_sales: { message: 'No sales found', status: 404 },
+  invalid_id: { message: 'Invalid id', status: 401 },
+  internal_error: { message: 'Internal error', status: 500 },
 };
 
 function makeError(err) {

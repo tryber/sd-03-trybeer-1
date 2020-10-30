@@ -25,4 +25,14 @@ const connection = () => (schema
       process.exit(1);
     }));
 
-module.exports = connection;
+const sqlConnection = async (query) => (
+  mysqlx.getSession(config).then(async (session) => session.sql(query).execute())
+    .catch((error) => {
+      throw new Error(error.message);
+    })
+);
+
+module.exports = {
+  connection,
+  sqlConnection,
+};

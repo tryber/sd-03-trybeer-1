@@ -15,7 +15,6 @@ const defineQnt = (p, cart) => {
 
 const ProductCard = (p, index, cart, addItem) => {
   const { name, price, image } = p;
-
   return (
     <div className="product-card">
       <img src={ image } alt={ name } data-testid={ `${index}-product-img` } />
