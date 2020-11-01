@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Grid, Card, Paper } from '@material-ui/core';
 import { useHistory, Link } from 'react-router-dom';
 import { ClientMenu, AdminMenu } from './Menu/index';
 import toBRCurrency from '../helpers/currency';
+import './Orders.css'
 
 const getOrders = async (setOrders, setMessage) => {
   try {
@@ -23,15 +25,23 @@ const getOrders = async (setOrders, setMessage) => {
 const orderCard = (index, { saleDate, totalPrice, id }) => {
   const startingOrderNumber = 1;
   return (
-    <Link to={ `/orders/${id}` } key={ `order-${index}` }>
-      <div data-testid={ `${index}-order-container` }>
-        <h3 data-testid={ `${index}-order-number` }>
-          {`Pedido ${index + startingOrderNumber}`}
-        </h3>
-        <h4 data-testid={ `${index}-order-date` }>{new Date(saleDate).toLocaleDateString('pt-BR')}</h4>
-        <h4 data-testid={ `${index}-order-total-value` }>{toBRCurrency(totalPrice)}</h4>
-      </div>
-    </Link>
+    <Grid item >
+      <Paper className='orderCard'>
+        <Link to={`/orders/${id}`} key={`order-${index}`}>
+          <div data-testid={`${index}-order-container`}>
+            <h3 data-testid={`${index}-order-number`}>
+              {`Pedido ${index + startingOrderNumber}`}
+            </h3>
+            <h4 data-testid={`${index}-order-date`}>
+              {new Date(saleDate).toLocaleDateString('pt-BR')}
+            </h4>
+            <h4 data-testid={`${index}-order-total-value`}>
+              {toBRCurrency(totalPrice)}
+            </h4>
+          </div>
+        </Link>
+      </Paper>
+    </Grid>
   );
 };
 
@@ -47,14 +57,22 @@ export default function Orders() {
     if (!lastStorage || !lastStorage.token) history.push('/login');
     // if (!orders || !orders.length) getOrders(setOrders, setMessage);
   }, [lastStorage, orders, history, setMessage]);
-  useEffect(() => { getOrders(setOrders, setMessage); }, []);
+  useEffect(() => {
+    getOrders(setOrders, setMessage);
+  }, []);
 
   return (
     <div>
       {role === 'admin' ? <AdminMenu /> : <ClientMenu />}
-      <h1 data-testid="top-title">Meus Pedidos</h1>
+      <h1 data-testid='top-title'>Meus Pedidos</h1>
       {message && <h3>{message}</h3>}
-      <div>{orders && orders.map((order, index) => orderCard(index, order))}</div>
+      <Grid container spacing={6}   className='ordersContainer'
+        direction="column"
+        justify="center"
+        alignItems="center"
+        >
+        {orders && orders.map((order, index) => orderCard(index, order))}
+      </Grid>
     </div>
   );
 }

@@ -1,5 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  TextField,
+  Button,
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
 import { ClientMenu, AdminMenu } from './Menu/index';
@@ -41,14 +45,14 @@ function Profile() {
     if (!lastStorage || !lastStorage.token) return history.push('/login');
 
     const testName = /^[ a-z]+$/i.test(name);
-    // const nameLength = 14;
+    const nameLength = 14;
 
     if (!testName || lastStorage.name === name
-    /* || name.length < nameLength */
+    || name.length < nameLength
     ) return setDisabled(true);
 
     return setDisabled(false);
-  }, [lastStorage.name, name, setError, history, lastStorage]);
+  }, [lastStorage.name, name, setError, history, lastStorage, setName]);
 
   return (
     <div>
@@ -69,7 +73,7 @@ function Profile() {
                 { email }
               </p>
             )
-            : (<input
+            : (<TextField
               type="email"
               id="email"
               value={ email }
@@ -91,7 +95,7 @@ function Profile() {
                 {name}
               </p>
             )
-            : <input
+            : <TextField
               type="name"
               id="name"
               value={ name }
@@ -101,14 +105,16 @@ function Profile() {
             />}
         </label>
 
-        <button
+        <Button
           disabled={ disabled }
+          color='primary'
+          contained
           type="submit"
           onClick={ (event) => handlePerfilChange(event, name, setError, history) }
           data-testid="profile-save-btn"
         >
           Salvar
-        </button>
+        </Button>
       </form>
     </div>
   );

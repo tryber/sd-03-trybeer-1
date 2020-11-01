@@ -6,3 +6,10 @@ body {
   align-content: flex-end;
   justify-content: space-between;
 }
+.tableContainer{
+  padding: 10vh 1vw;
+  width: 90vw;
+  height: 100vh;
+  font-size: 1em;
+  box-sizing: border-box;
+}
