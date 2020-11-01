@@ -70,7 +70,7 @@ export default function Checkout() {
         <h3>Produtos</h3>
         <h2>{ message }</h2>
         <div>
-          {cart && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
+          {cart.length && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
         </div>
         <h6 data-testid="order-total-value">
           {' '}

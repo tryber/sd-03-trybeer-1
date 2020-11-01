@@ -10,9 +10,9 @@ const createUser = async (userInfo) => {
   }
   const whichRole = role ? 'admin' : 'client';
   const modelInfo = { name, email, password, role: whichRole };
-  const createdUser = await userModel.registerUser(modelInfo);
-  const token = createToken(name, email, role);
-  return { user: createdUser, token };
+  const insertedId = await userModel.registerUser(modelInfo);
+  const token = createToken(name, email, role, insertedId);
+  return { token };
 };
 
 module.exports = createUser;
