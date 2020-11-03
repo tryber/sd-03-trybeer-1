@@ -3,10 +3,8 @@ import { Redirect, useParams } from 'react-router-dom';
 import {
   Table,
   TableHead,
-  TableBody,
   TableRow,
   TableCell,
-  TextField,
 } from '@material-ui/core';
 import axios from 'axios';
 import { ClientMenu } from './Menu/index';

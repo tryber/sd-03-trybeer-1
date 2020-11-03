@@ -51,8 +51,7 @@
 .error-message {
   color: red;
   position: absolute;
-  margin-left: 44.5vw;
-  margin-top: 59vh;
+  margin-top: 16vh;
 }
 
 @media (max-width: 600px) {
@@ -64,10 +63,5 @@
   .register-login {
     margin-left: 35vw;
     margin-top: 1%;
-  }
-  
-  .error-message {
-    margin-left: 35vw;
-    margin-top: 58vh;
   }
 }

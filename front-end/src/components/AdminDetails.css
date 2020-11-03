@@ -1,0 +1,21 @@
+.order-details-admin {
+  margin-left: 32vw;
+  width: max-content;
+}
+
+.order-details-admin h1 {
+  margin: 0;
+  padding: 20px 0 0 0;
+}
+
+.product-details {
+  display: flex;
+  height: 150px;
+  justify-content: space-between;
+  overflow-x: scroll;
+  width: 600px;
+}
+
+.order-details-table {
+  max-width: 50vw;
+}

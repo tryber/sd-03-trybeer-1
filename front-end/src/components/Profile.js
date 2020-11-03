@@ -58,52 +58,51 @@ function Profile() {
     <div>
       {role === 'administrator' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meu perfil</h1>
-      {error && <h3>{ error }</h3>}
       <form>
-        <label htmlFor="email">
-          Email
-          { role === 'administrator'
-            ? (
-              <p
-                type="email"
-                id="email"
-                data-testid="profile-email"
-                readOnly
-              >
-                { email }
-              </p>
-            )
-            : (<TextField
+        { role === 'administrator'
+          ? (
+            <p
               type="email"
               id="email"
-              value={ email }
-              data-testid="profile-email-input"
+              data-testid="profile-email"
               readOnly
-            />)}
-        </label>
+            >
+              { email }
+            </p>
+          )
+          : (<TextField
+            type="email"
+            id="email"
+            label="Email"
+            value={ email }
+            data-testid="profile-email-input"
+            readOnly
+            variant="outlined"
+            size="medium"
+          />)
+        }
 
-        <label htmlFor="name">
-          Name
-          { role === 'administrator'
-            ? (
-              <p
-                type="name"
-                id="name"
-                data-testid="profile-name"
-              >
-                {' '}
-                {name}
-              </p>
-            )
-            : <TextField
+        { role === 'administrator'
+          ? (
+            <p
               type="name"
               id="name"
-              value={ name }
-              onChange={ (event) => setName(event.target.value) }
-              required
-              data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
-            />}
-        </label>
+              data-testid="profile-name"
+            >
+              {' '}
+              {name}
+            </p>
+          )
+          : <TextField
+            type="name"
+            label="Name"
+            value={ name }
+            onChange={ (event) => setName(event.target.value) }
+            required
+            data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
+            variant="outlined"
+            size="medium"
+        />}
 
         <Button
           disabled={ disabled }
@@ -116,6 +115,7 @@ function Profile() {
           Salvar
         </Button>
       </form>
+      {error && <h3>{ error }</h3>}
     </div>
   );
 }

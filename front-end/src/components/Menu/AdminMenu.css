@@ -1,0 +1,27 @@
+.admin-side-bar-container {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  height: 100vh;
+  position: fixed;
+  width: 25vw;
+}
+
+.logo {
+  height: auto;
+  margin-left: -20px;
+  margin-top: -50px;
+  width: auto;
+}
+
+.menu-links-div {
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+  justify-content: space-evenly;
+  margin: 0 2.5vw;
+  width: 20vw;
+}
+
+#button-link {  
+  text-decoration: none;  
+  width: 20vw;
+}

@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import {
+  TextField,
+  Button,
+} from '@material-ui/core';
 import { ContextAplication } from '../context/ContextAplication';
 import './Login.css';
 
@@ -45,47 +49,43 @@ function Login() {
 
   return (
     <div className="page-login">
-      {error && <p className="error-message">{ error }</p>}
       <form className="form-login">
-        <label htmlFor="email">
-          Email
-          {' '}
-          <br />
-          <input
-            type="email"
-            id="email"
-            onChange={ (event) => setEmail(event.target.value) }
-            required
-            data-testid="email-input"
-          />
-        </label>
-
-        <label htmlFor="password">
-          Password
-          {' '}
-          <br />
-          <input
-            type="password"
-            id="password"
-            minLength="6"
-            onChange={ (event) => setPassword(event.target.value) }
-            required
-            data-testid="password-input"
-          />
-        </label>
-
-        <button
+        <TextField
+          type="email"
+          id="email"
+          label="Email"
+          onChange={ (event) => setEmail(event.target.value) }
+          data-testid="email-input"
+          variant="outlined"
+          required
+          size="medium"
+        />
+        <TextField
+          type="password"
+          id="password"
+          label="Senha"
+          minLength="6"
+          onChange={ (event) => setPassword(event.target.value) }
+          required
+          data-testid="password-input"
+          variant="outlined"
+          size="medium"
+        />
+        { error && <p className="error-message">{ error }</p> }
+        <Button
           disabled={ informations }
+          color='primary'
+          contained
           type="submit"
           onClick={ (event) => handleSignIn(event, email, password, setError, history) }
           data-testid="signin-btn"
           className="button-login"
         >
           ENTRAR
-        </button>
+        </Button>
       </form>
       <Link to="/register"><button type="button" data-testid="no-account-btn" className="register-login">Ainda não tenho conta</button></Link>
-    </div>
+    </div>  
   );
 }
 

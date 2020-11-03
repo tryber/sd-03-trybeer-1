@@ -1,4 +1,12 @@
+.orders-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10vw 0 30vw;
+}
+
 .order-card {
   border: 1px solid black;
+  cursor: pointer;
+  margin-top: 20px;
   width: 300px;
 }

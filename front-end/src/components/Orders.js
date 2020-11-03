@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Card, Paper } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 import { useHistory, Link } from 'react-router-dom';
 import { ClientMenu, AdminMenu } from './Menu/index';
 import toBRCurrency from '../helpers/currency';

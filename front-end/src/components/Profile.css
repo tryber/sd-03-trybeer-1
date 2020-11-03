@@ -1,10 +1,12 @@
-form{
+form  {
   display: flex;
   flex-direction: column;
+  height: 40vh;
+  justify-content: space-evenly;
+  margin: 0 25vw;
+  width: 50vw;
 }
-label{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 10vh;
+
+h3 {
+  margin: 0 38vw;
 }
