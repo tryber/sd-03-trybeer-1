@@ -28,16 +28,13 @@ const handlePerfilChange = async (e, name, setError) => {
 };
 
 function Profile() {
-  const {
-    error,
-    setError,
-  } = useContext(ContextAplication);
 
   // validation based on code from https://github.com/tryber/sd-04-recipes-app-4/blob/master/src/pages/Profile.jsx
   const lastStorage = JSON.parse(localStorage.getItem('user')) || {};
   const { email, role } = lastStorage;
   const history = useHistory();
 
+  const [message, setMessage] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [name, setName] = useState(lastStorage.name);
 
@@ -52,12 +49,13 @@ function Profile() {
     ) return setDisabled(true);
 
     return setDisabled(false);
-  }, [lastStorage.name, name, setError, history, lastStorage, setName]);
+  }, [lastStorage.name, name, setMessage, history, lastStorage, setName]);
 
   return (
     <div>
       {role === 'administrator' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meu perfil</h1>
+      {message && <h3>{ message }</h3>}
       <form>
         { role === 'administrator'
           ? (
@@ -109,13 +107,12 @@ function Profile() {
           color='primary'
           contained
           type="submit"
-          onClick={ (event) => handlePerfilChange(event, name, setError, history) }
+          onClick={ (event) => handlePerfilChange(event, name, setMessage, history) }
           data-testid="profile-save-btn"
         >
           Salvar
         </Button>
       </form>
-      {error && <h3>{ error }</h3>}
     </div>
   );
 }
