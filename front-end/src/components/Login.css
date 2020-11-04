@@ -43,7 +43,7 @@
 .register-login {
   border: none;
   color: rgb(20, 33, 61);
-  margin-left: 43.5%;
+  margin-left: 0.5%;
   margin-top: 1%;
   padding: 14px 28px;
 }
@@ -61,7 +61,7 @@
   }
   
   .register-login {
-    margin-left: 35vw;
+    margin-left: 0.5%;
     margin-top: 1%;
   }
 }

@@ -59,14 +59,16 @@ function Profile() {
       <form>
         { role === 'administrator'
           ? (
-            <p
-              type="email"
-              id="email"
-              data-testid="profile-email"
-              readOnly
-            >
-              { email }
-            </p>
+            <TextField
+            type="email"
+            id="email"
+            label="Email"
+            value={ email }
+            data-testid="profile-email-input"
+            readOnly
+            variant="outlined"
+            size="medium"
+          />
           )
           : (<TextField
             type="email"
@@ -82,14 +84,16 @@ function Profile() {
 
         { role === 'administrator'
           ? (
-            <p
-              type="name"
-              id="name"
-              data-testid="profile-name"
-            >
-              {' '}
-              {name}
-            </p>
+            <TextField
+            type="name"
+            label="Name"
+            value={ name }
+            onChange={ (event) => setName(event.target.value) }
+            required
+            data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
+            variant="outlined"
+            size="medium"
+        />
           )
           : <TextField
             type="name"

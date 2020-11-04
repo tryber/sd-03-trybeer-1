@@ -1,13 +1,13 @@
 .top-menu {
   align-items: center;
+  background-color: white;
   color: black;
   display: flex;
-  height: 60px;
-  justify-content: space-evenly ;
-  margin-left: -22vw;
-  position: fixed;
-  width: 100vw;
+  height: 90px;
+  justify-content: space-evenly;
+  margin-left: -15%;
   max-width:95vw;
+  width: 100%;
 }
 
 .menu-links {
@@ -20,5 +20,11 @@
 
 #button-link-client {
   text-decoration: none;  
-  width: 15vw;
+  width: 100%;
+}
+
+@media (max-width: 650px) {
+  .top-menu {
+    margin-left: 0;
+  }
 }

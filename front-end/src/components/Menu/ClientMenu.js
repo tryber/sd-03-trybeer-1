@@ -94,6 +94,7 @@ function ClientMenu() {
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="white"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -107,7 +108,7 @@ function ClientMenu() {
             className={clsx(classes.menuButton, open && classes.hide)}
           >
             <FontAwesomeIcon icon={faBars} size="1x" data-testid="top-hamburguer" id="main-icon"/>
-          </IconButton>
+          </IconButton> 
           <img src={cheers} alt="Cheers Logo"/>
         </div>
       </AppBar>
