@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { ContextAplication } from '../context/ContextAplication';
 import { ClientMenu, AdminMenu } from './Menu/index';
 import './Profile.css';
 
@@ -24,16 +23,13 @@ const handlePerfilChange = async (e, name, setError) => {
 };
 
 function Profile() {
-  const {
-    error,
-    setError,
-  } = useContext(ContextAplication);
 
   // validation based on code from https://github.com/tryber/sd-04-recipes-app-4/blob/master/src/pages/Profile.jsx
   const lastStorage = JSON.parse(localStorage.getItem('user')) || {};
   const { email, role } = lastStorage;
   const history = useHistory();
 
+  const [message, setMessage] = useState(true);
   const [disabled, setDisabled] = useState(true);
   const [name, setName] = useState(lastStorage.name);
 
@@ -48,13 +44,13 @@ function Profile() {
     ) return setDisabled(true);
 
     return setDisabled(false);
-  }, [lastStorage.name, name, setError, history, lastStorage]);
+  }, [lastStorage.name, name, setMessage, history, lastStorage]);
 
   return (
     <div>
       {role === 'administrator' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meu perfil</h1>
-      {error && <h3>{ error }</h3>}
+      {message && <h3>{ message }</h3>}
       <form>
         <label htmlFor="email">
           Email
@@ -104,7 +100,7 @@ function Profile() {
         <button
           disabled={ disabled }
           type="submit"
-          onClick={ (event) => handlePerfilChange(event, name, setError, history) }
+          onClick={ (event) => handlePerfilChange(event, name, setMessage, history) }
           data-testid="profile-save-btn"
         >
           Salvar
