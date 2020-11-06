@@ -23,7 +23,6 @@ const handlePerfilChange = async (e, name, setError) => {
 };
 
 function Profile() {
-
   // validation based on code from https://github.com/tryber/sd-04-recipes-app-4/blob/master/src/pages/Profile.jsx
   const lastStorage = JSON.parse(localStorage.getItem('user')) || {};
   const { email, role } = lastStorage;
