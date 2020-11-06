@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TextField,
+  Button,
+} from '@material-ui/core';
 import axios from 'axios';
 import { ContextAplication } from '../context/ContextAplication';
 import { ClientMenu } from './Menu/index';
@@ -62,38 +71,59 @@ export default function Checkout() {
   useEffect(() => {
     if (totalPrice(localCart || []) <= zero) setMessage('Não há produtos no carrinho');
   }, [cart, localCart]);
-
   return !user ? <Redirect to="/login" /> : (
     <div>
       <ClientMenu />
-      <div style={ { padding: '5vh 10vw' } }>
+      <div className="tableContainer">
         <h3>Produtos</h3>
         <h2>{ message }</h2>
-        <div>
-          {cart && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
-        </div>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Unidades</TableCell>
+              <TableCell>Nome</TableCell>
+              <TableCell>Preço Total</TableCell>
+              <TableCell>Preço da Unidade</TableCell>
+              <TableCell>Remove do Carrinho</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {cart.length && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
+          </TableBody>
+        </Table>
         <h6 data-testid="order-total-value">
           {' '}
           { toBRCurrency(totalPrice(cart)) }
         </h6>
         <h3>Endereço</h3>
         <form display="block" className="form">
-          <label htmlFor="street">
-            Rua
-            <input name="street" type="text" data-testid="checkout-street-input" value={ street } onChange={ ({ target }) => setStreet(target.value) } />
-          </label>
-          <label htmlFor="number">
-            Número
-            <input type="number" name="number" data-testid="checkout-house-number-input" min="1" value={ streetNumber } onChange={ ({ target }) => setStreetNumber(target.value) } />
-          </label>
-          <button
+          <TextField
+            name="street"
+            label="Rua"
+            data-testid="checkout-street-TextField"
+            value={ street }
+            onChange={ ({ target }) => setStreet(target.value) }
+          />
+
+          <TextField
+            type="number"
+            name="number"
+            label="Número"
+            data-testid="checkout-house-number-input"
+            min="1"
+            value={ streetNumber }
+            onChange={ ({ target }) => setStreetNumber(target.value) }
+          />
+          <Button
             type="submit"
+            contained
+            color="primary"
             data-testid="checkout-finish-btn"
             disabled={ disabled }
             onClick={ (e) => submitBuy(e, cart, street, streetNumber, setContextMessage, history) }
           >
             Enviar
-          </button>
+          </Button>
         </form>
       </div>
     </div>

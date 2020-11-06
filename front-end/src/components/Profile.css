@@ -1,0 +1,20 @@
+body {
+  text-align: center;
+}
+form  {
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  justify-content: space-evenly;
+  margin: 0 25vw;
+  width: 50vw;
+}
+
+h3 {
+  margin: 0 38vw;
+}
+
+h1 {
+  margin-top: 0;
+  padding: 10px;
+}

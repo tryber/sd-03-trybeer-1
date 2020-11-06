@@ -32,7 +32,8 @@ const finishSalesController = async (req, res) => {
   return res.status(200).json(sales);
 };
 
-const getSaleByUser = async (req, res, next) => {
+const getSalesByUser = async (req, res, next) => {
+  console.log(req.user);
   const sale = await getSaleByUserId(req.user.id);
   if (sale.error) return next(sale.error);
 
@@ -44,5 +45,5 @@ module.exports = {
   listAllSales,
   updateSaleById,
   getSale,
-  getSaleByUser,
+  getSalesByUser,
 };

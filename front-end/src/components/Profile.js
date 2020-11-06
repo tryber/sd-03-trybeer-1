@@ -1,7 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  TextField,
+  Button,
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { ContextAplication } from '../context/ContextAplication';
 import { ClientMenu, AdminMenu } from './Menu/index';
 import './Profile.css';
 
@@ -24,16 +27,12 @@ const handlePerfilChange = async (e, name, setError) => {
 };
 
 function Profile() {
-  const {
-    error,
-    setError,
-  } = useContext(ContextAplication);
-
   // validation based on code from https://github.com/tryber/sd-04-recipes-app-4/blob/master/src/pages/Profile.jsx
   const lastStorage = JSON.parse(localStorage.getItem('user')) || {};
   const { email, role } = lastStorage;
   const history = useHistory();
 
+  const [message, setMessage] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [name, setName] = useState(lastStorage.name);
 
@@ -41,74 +40,79 @@ function Profile() {
     if (!lastStorage || !lastStorage.token) return history.push('/login');
 
     const testName = /^[ a-z]+$/i.test(name);
-    // const nameLength = 14;
+    const nameLength = 14;
 
     if (!testName || lastStorage.name === name
-    /* || name.length < nameLength */
+    || name.length < nameLength
     ) return setDisabled(true);
 
     return setDisabled(false);
-  }, [lastStorage.name, name, setError, history, lastStorage]);
+  }, [lastStorage.name, name, setMessage, history, lastStorage, setName]);
 
   return (
     <div>
       {role === 'administrator' ? <AdminMenu /> : <ClientMenu />}
       <h1 data-testid="top-title">Meu perfil</h1>
-      {error && <h3>{ error }</h3>}
+      {message && <h3>{ message }</h3>}
       <form>
-        <label htmlFor="email">
-          Email
-          { role === 'administrator'
-            ? (
-              <p
-                type="email"
-                id="email"
-                data-testid="profile-email"
-                readOnly
-              >
-                { email }
-              </p>
-            )
-            : (<input
+        { role === 'administrator'
+          ? (
+            <TextField
               type="email"
               id="email"
+              label="Email"
               value={ email }
               data-testid="profile-email-input"
               readOnly
-            />)}
-        </label>
+              variant="outlined"
+              size="medium"
+            />
+          )
+          : (<TextField
+            type="email"
+            id="email"
+            label="Email"
+            value={ email }
+            data-testid="profile-email-input"
+            readOnly
+            variant="outlined"
+            size="medium"
+          />)}
 
-        <label htmlFor="name">
-          Name
-          { role === 'administrator'
-            ? (
-              <p
-                type="name"
-                id="name"
-                data-testid="profile-name"
-              >
-                {' '}
-                {name}
-              </p>
-            )
-            : <input
+        { role === 'administrator'
+          ? (
+            <TextField
               type="name"
-              id="name"
+              label="Name"
               value={ name }
               onChange={ (event) => setName(event.target.value) }
               required
               data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
-            />}
-        </label>
+              variant="outlined"
+              size="medium"
+            />
+          )
+          : <TextField
+            type="name"
+            label="Name"
+            value={ name }
+            onChange={ (event) => setName(event.target.value) }
+            required
+            data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
+            variant="outlined"
+            size="medium"
+          />}
 
-        <button
+        <Button
           disabled={ disabled }
+          color="primary"
+          contained
           type="submit"
-          onClick={ (event) => handlePerfilChange(event, name, setError, history) }
+          onClick={ (event) => handlePerfilChange(event, name, setMessage, history) }
           data-testid="profile-save-btn"
         >
           Salvar
-        </button>
+        </Button>
       </form>
     </div>
   );

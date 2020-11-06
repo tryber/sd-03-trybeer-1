@@ -1,0 +1,18 @@
+body{
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+}
+.ordersContainer{
+  padding-top: 1em;
+}
+.orderCard{
+  width: 95vw;
+  text-align: center;
+  text-decoration:none;
+  
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.orderCard:hover{
+  border-bottom: 2px solid rgb(248, 193, 2);
+
+}

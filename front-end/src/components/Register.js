@@ -1,6 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import {
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+} from '@material-ui/core';
 import { ContextAplication } from '../context/ContextAplication';
 import './Register.css';
 
@@ -52,37 +58,54 @@ export default function Register() {
         <label htmlFor="error">
           <h3 name="error">{ error }</h3>
         </label>
-        <label htmlFor="name">
-          Nome
-          {' '}
-          <br />
-          <input name="name" type="text" value={ name } onChange={ ({ target }) => setName(target.value) } data-testid="signup-name" />
-        </label>
-        <label htmlFor="email">
-          Email
-          {' '}
-          <br />
-          <input name="email" type="email" value={ email } onChange={ ({ target }) => setEmail(target.value) } data-testid="signup-email" />
-        </label>
-        <label htmlFor="password">
-          Password
-          {' '}
-          <br />
-          <input
-            name="password"
-            type="password"
-            value={ password }
-            onChange={ ({ target }) => setPassword(target.value) }
-            data-testid="signup-password"
-          />
-        </label>
-        <label htmlFor="checkbox">
-          <input name="checkbox" type="checkbox" value={ checkbox } onChange={ ({ target }) => setCheckbox(target.value) } data-testid="signup-seller" />
-          Quero Vender
-        </label>
-        <button
-          type="submit"
+        <TextField
+          type="text"
+          value={ name }
+          label="Nome"
+          onChange={ ({ target }) => setName(target.value) }
+          data-testid="signup-name"
+          required
+          variant="outlined"
+          size="medium"
+        />
+        <TextField
+          type="email"
+          id="email"
+          label="Email"
+          value={ email }
+          onChange={ ({ target }) => setEmail(target.value) }
+          data-testid="signup-email"
+          variant="outlined"
+          required
+          size="medium"
+        />
+        <TextField
+          type="password"
+          id="password"
+          label="Senha"
+          minLength="6"
+          onChange={ (event) => setPassword(event.target.value) }
+          required
+          data-testid="password-input"
+          variant="outlined"
+          size="medium"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={ ({ target }) => setCheckbox(target.value) }
+              name="checkedB"
+              color="primary"
+              value={ checkbox }
+            />
+        }
+          label="Quero Vender"
+        />
+        <Button
           disabled={ disabled }
+          color="primary"
+          contained
+          type="submit"
           onClick={
             (e) => submitRegister(e, email, password, name, checkbox, history, setError, error)
           }
@@ -90,7 +113,8 @@ export default function Register() {
           className="button-register"
         >
           Cadastrar
-        </button>
+        </Button>
+
       </form>
     </div>
   );

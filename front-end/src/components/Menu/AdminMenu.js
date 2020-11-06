@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+import cheers from '../../images/cheers.png';
 import './AdminMenu.css';
 
 const logout = (e, history) => {
@@ -12,11 +14,26 @@ function AdminMenu() {
   const history = useHistory();
   return (
     <aside className="admin-side-bar-container">
-      <h1>Trybeer</h1>
-      <div>
-        <Link to="/admin/orders" data-testid="side-menu-item-orders"><button type="button">Pedidos</button></Link>
-        <Link to="/admin/profile" data-testid="side-menu-item-profile"><button type="button">Perfil</button></Link>
-        <button type="submit" data-testid="side-menu-item-logout" onClick={ (e) => logout(e, history) }>Sair</button>
+      <img src={ cheers } className="logo" alt="Cheers Logo" />
+      <div className="menu-links-div">
+        <Link to="/admin/orders" data-testid="side-menu-item-orders">
+          <Button variant="outlined" color="primary" id="button-link">
+            Pedidos
+          </Button>
+        </Link>
+        <Link to="/admin/profile" data-testid="side-menu-item-profile">
+          <Button variant="outlined" color="primary" id="button-link">
+            Perfil
+          </Button>
+        </Link>
+        <Button
+          variant="outlined"
+          color="primary"
+          data-testid="side-menu-item-logout"
+          onClick={ (e) => logout(e, history) }
+        >
+          Sair
+        </Button>
       </div>
     </aside>
   );

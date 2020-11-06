@@ -1,34 +1,38 @@
 .products-page-div {
-  height: 100vh;
-  width: 100vw;
+  height: 90vh;
+  width: 90vw;
+  padding-bottom: 10vh;
 }
 
 .products-list{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-bottom: 75px;
+  padding-bottom: 20vh;
 }
 
 .product-card{
+  align-items: center;
   display: flex;
   flex-direction: column;
-  height: 400px;
-  justify-content: space-between;
-  margin: 70px 10px 0 10px;
+  text-align: center;
+  justify-content: space-around;
+  /* margin: 70px 10px 0 10px; */
   padding: 5px;
-  width: 200px;
+  max-height: 70vh;
 }
 
 
 img{
+  align-items: center;
   display: flex;
   flex-direction: column;
-  height: 200px;
+  object-fit: cover;
+  height: 33vh;
   justify-content: space-between;
-  margin: 70px 10px 0 10px;
-  padding: 5px;
-  width: 150px;
+  /* margin: 70px 10px 0 10px; */
+  padding: 1em;
+  max-width: 100%;
 }
 
 /* https://www.w3schools.com/css/css3_buttons.asp */
@@ -40,9 +44,10 @@ img{
   align-items: center;
   background-color: rgb(248, 193, 2);
   display: flex;
-  justify-content: space-evenly;
+  height: 5vh;
+  justify-content: space-between;
   margin-left: 5%;
-  width: 180px;
+  width: 90%;
 }
 
 .quantity-div button{
@@ -59,6 +64,8 @@ img{
 
 .checkout-bottom {
   align-items: center;
+  border-top: 1px solid rgb(248, 193, 2);
+  box-shadow: 1em 1em 2em rgba(0,0,0,1);
   background-color: white;
   bottom: 0;
   display: flex;
@@ -69,4 +76,5 @@ img{
   position: fixed;
   right: 0;
   width: 100vw;
+  margin-top: 15vh;
 }

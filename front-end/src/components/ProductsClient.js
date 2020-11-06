@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { Grid, Button } from '@material-ui/core';
 import { ContextAplication } from '../context/ContextAplication';
 import ProductCard from './ProductCard';
 import { ClientMenu } from './Menu/index';
@@ -84,11 +85,29 @@ const ProductsClient = () => {
       { user === null && <Redirect to="/login" />}
       <ClientMenu />
       { contextMessage }
-      <div className="products-list">
-        {products.length && products.map((p, index) => ProductCard(p, index, cart, addItem))}
-      </div>
+      <Grid className="products-list" container spacing={ 4 }>
+        {products.length && products.map((p, index) => (
+          <Grid key={ p } item xs>
+            {' '}
+            {
+          ProductCard(p, index, cart, addItem)
+          }
+            {' '}
+
+          </Grid>
+        ))}
+      </Grid>
       <div className="checkout-bottom">
-        <Link to="/checkout"><button type="button" data-testid="checkout-bottom-btn" disabled={ disabled }>Ver Carrinho</button></Link>
+        <Link to="/checkout">
+          <Button
+            type="button"
+            variant="contained"
+            data-testid="checkout-bottom-btn"
+            disabled={ disabled }
+          >
+            Ver Carrinho
+          </Button>
+        </Link>
         <p data-testid="checkout-bottom-btn-value">
           {toBRCurrency(cartTotal(cart))}
         </p>

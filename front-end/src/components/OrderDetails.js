@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+} from '@material-ui/core';
 import axios from 'axios';
 import { ClientMenu } from './Menu/index';
 import toBRCurrency from '../helpers/currency';
+import './OrderDetails.css';
 
 async function getOrder(id, setMessage, setOrder) {
   const user = JSON.parse(localStorage.getItem('user')) || null;
@@ -27,11 +34,11 @@ function productRow(
   index,
 ) {
   return (
-    <div key={ productName }>
-      <p data-testid={ `${index}-product-qtd` }>{soldQuantity}</p>
-      <h6 data-testid={ `${index}-product-name` }>{productName}</h6>
-      <h6 data-testid={ `${index}-product-total-value` }>{toBRCurrency(soldQuantity * productPrice)}</h6>
-    </div>
+    <TableRow key={ productName }>
+      <TableCell data-testid={ `${index}-product-qtd` }>{soldQuantity}</TableCell>
+      <TableCell data-testid={ `${index}-product-name` }>{productName}</TableCell>
+      <TableCell data-testid={ `${index}-product-total-value` }>{toBRCurrency(soldQuantity * productPrice)}</TableCell>
+    </TableRow>
   );
 }
 
@@ -49,7 +56,7 @@ export default function Checkout() {
   return (
     <div>
       <ClientMenu />
-      <div style={ { padding: '10vh 20vh' } }>
+      <div style={ { padding: '10vh' } }>
         <h3 data-testid="top-title">Detalhes de Pedido</h3>
         <h2>{ message }</h2>
         <h4 data-testid="order-number">
@@ -57,22 +64,29 @@ export default function Checkout() {
           {' '}
           { order.saleId }
         </h4>
-        <div>
-          {
-            order.saleProducts
-            && order.saleProducts.map((product, index) => productRow(product, index))
-          }
-        </div>
         <h4 data-testid="order-date">
           {' '}
           {new Date(order.saleDate).toLocaleDateString('pt-BR')}
           {' '}
         </h4>
-        <h6 data-testid="order-total-value">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Unidades</TableCell>
+              <TableCell>Nome</TableCell>
+              <TableCell>Preço Total</TableCell>
+            </TableRow>
+          </TableHead>
+          {
+            order.saleProducts
+            && order.saleProducts.map((product, index) => productRow(product, index))
+          }
+        </Table>
+        <h4 data-testid="order-total-value">
           Total:
           {' '}
           { order.total && toBRCurrency(order.total) }
-        </h6>
+        </h4>
       </div>
     </div>
   );

@@ -24,7 +24,8 @@ const registerUser = async ({ name, email, password, role }) => connection().the
   .getTable('users')
   .insert(['name', 'email', 'password', 'role'])
   .values(name, email, password, role)
-  .execute());
+  .execute())
+  .then((result) => result.getAutoIncrementValue());
 
 const updateUser = async (name, email) => connection().then((db) => db
   .getTable('users')
