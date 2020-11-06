@@ -5,6 +5,7 @@
 }
 
 .order-card {
+  background-color: white;
   border: 1px solid black;
   cursor: pointer;
   margin-top: 20px;

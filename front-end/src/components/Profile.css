@@ -13,3 +13,8 @@ form  {
 h3 {
   margin: 0 38vw;
 }
+
+h1 {
+  margin-top: 0;
+  padding: 10px;
+}
