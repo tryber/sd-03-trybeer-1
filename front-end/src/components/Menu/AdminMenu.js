@@ -14,7 +14,7 @@ function AdminMenu() {
   const history = useHistory();
   return (
     <aside className="admin-side-bar-container">
-      <img src={ cheers } className="logo" alt="Cheers Logo"/>
+      <img src={ cheers } className="logo" alt="Cheers Logo" />
       <div className="menu-links-div">
         <Link to="/admin/orders" data-testid="side-menu-item-orders">
           <Button variant="outlined" color="primary" id="button-link">
@@ -26,7 +26,7 @@ function AdminMenu() {
             Perfil
           </Button>
         </Link>
-        <Button 
+        <Button
           variant="outlined"
           color="primary"
           data-testid="side-menu-item-logout"

@@ -33,7 +33,7 @@ const finishSalesController = async (req, res) => {
 };
 
 const getSalesByUser = async (req, res, next) => {
-  console.log(req.user)
+  console.log(req.user);
   const sale = await getSaleByUserId(req.user.id);
   if (sale.error) return next(sale.error);
 

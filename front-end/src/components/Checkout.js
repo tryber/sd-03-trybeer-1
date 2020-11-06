@@ -74,34 +74,46 @@ export default function Checkout() {
   return !user ? <Redirect to="/login" /> : (
     <div>
       <ClientMenu />
-      <div className='tableContainer'>
+      <div className="tableContainer">
         <h3>Produtos</h3>
         <h2>{ message }</h2>
         <Table>
-        <TableHead>
-        <TableRow>
-          <TableCell>Unidades</TableCell>
-          <TableCell>Nome</TableCell>
-          <TableCell>Preço Total</TableCell>
-          <TableCell>Preço da Unidade</TableCell>
-          <TableCell>Remove do Carrinho</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-          {cart.length && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
-      </TableBody>
-      </Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Unidades</TableCell>
+              <TableCell>Nome</TableCell>
+              <TableCell>Preço Total</TableCell>
+              <TableCell>Preço da Unidade</TableCell>
+              <TableCell>Remove do Carrinho</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {cart.length && cart.map((product, index) => CheckoutCard(product, index, removeItem))}
+          </TableBody>
+        </Table>
         <h6 data-testid="order-total-value">
           {' '}
           { toBRCurrency(totalPrice(cart)) }
         </h6>
         <h3>Endereço</h3>
         <form display="block" className="form">
-            <TextField name="street" 
-            label='Rua' data-testid="checkout-street-TextField" value={ street } onChange={ ({ target }) => setStreet(target.value) } />
+          <TextField
+            name="street"
+            label="Rua"
+            data-testid="checkout-street-TextField"
+            value={ street }
+            onChange={ ({ target }) => setStreet(target.value) }
+          />
 
-            <TextField type="number" name="number"
-            label='Número' data-testid="checkout-house-number-input" min="1" value={ streetNumber } onChange={ ({ target }) => setStreetNumber(target.value) } />
+          <TextField
+            type="number"
+            name="number"
+            label="Número"
+            data-testid="checkout-house-number-input"
+            min="1"
+            value={ streetNumber }
+            onChange={ ({ target }) => setStreetNumber(target.value) }
+          />
           <Button
             type="submit"
             contained

@@ -74,7 +74,7 @@ function Login() {
         { error && <p className="error-message">{ error }</p> }
         <Button
           disabled={ informations }
-          color='primary'
+          color="primary"
           contained
           type="submit"
           onClick={ (event) => handleSignIn(event, email, password, setError, history) }
@@ -85,7 +85,7 @@ function Login() {
         </Button>
       </form>
       <Link to="/register"><button type="button" data-testid="no-account-btn" className="register-login">Ainda não tenho conta</button></Link>
-    </div>  
+    </div>
   );
 }
 

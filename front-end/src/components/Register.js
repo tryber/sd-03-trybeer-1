@@ -62,7 +62,8 @@ export default function Register() {
           type="text"
           value={ name }
           label="Nome"
-          onChange={ ({ target }) => setName(target.value) } data-testid="signup-name"
+          onChange={ ({ target }) => setName(target.value) }
+          data-testid="signup-name"
           required
           variant="outlined"
           size="medium"
@@ -72,7 +73,8 @@ export default function Register() {
           id="email"
           label="Email"
           value={ email }
-          onChange={ ({ target }) => setEmail(target.value) } data-testid="signup-email"
+          onChange={ ({ target }) => setEmail(target.value) }
+          data-testid="signup-email"
           variant="outlined"
           required
           size="medium"
@@ -89,19 +91,19 @@ export default function Register() {
           size="medium"
         />
         <FormControlLabel
-        control={
-          <Checkbox
-            onChange={ ({ target }) => setCheckbox(target.value) }
-            name="checkedB"
-            color="primary"
-            value={ checkbox }
-          />
+          control={
+            <Checkbox
+              onChange={ ({ target }) => setCheckbox(target.value) }
+              name="checkedB"
+              color="primary"
+              value={ checkbox }
+            />
         }
-        label="Quero Vender"
+          label="Quero Vender"
         />
         <Button
           disabled={ disabled }
-          color='primary'
+          color="primary"
           contained
           type="submit"
           onClick={

@@ -14,13 +14,12 @@ app.use('/images', express.static(`${process.cwd()}/images`));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 app.use((req, res, next) => {
-  console.log(req.method)
-  console.log(req.path)
-  console.log(req.body)
-  return next()
- });
+  console.log(req.method);
+  console.log(req.path);
+  console.log(req.body);
+  return next();
+});
 app.use('/login', routers.login);
 
 app.use('/register', routers.register);

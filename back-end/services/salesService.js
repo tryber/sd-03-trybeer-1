@@ -53,7 +53,7 @@ const finishSale = async (user, order) => {
 const getSaleByUser = async (id) => {
   try {
     const sale = await getSaleByUserId(id);
-    console.log('sale:', sale)
+    console.log('sale:', sale);
     return sale;
   } catch (e) {
     console.error(e);

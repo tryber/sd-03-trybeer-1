@@ -1,5 +1,7 @@
 import React from 'react';
-import { Card, Button, Paper, CardContent } from '@material-ui/core';
+import {
+  Card, Button, Paper, CardContent,
+} from '@material-ui/core';
 
 const minusOne = -1;
 const plusOne = 1;
@@ -17,34 +19,36 @@ const defineQnt = (p, cart) => {
 const ProductCard = (p, index, cart, addItem) => {
   const { name, price, image } = p;
   return (
-    <Card className='product-card' key={`${p}-${index}`}>
-      <Paper height='33vh' variant="outlined">
-        <img src={image} alt={name} data-testid={`${index}-product-img`} />
+    <Card className="product-card" key={ `${p}-${index}` }>
+      <Paper height="33vh" variant="outlined">
+        <img src={ image } alt={ name } data-testid={ `${index}-product-img` } />
       </Paper>
-      <h3 data-testid={`${index}-product-name`}>{name}</h3>
-      <p data-testid={`${index}-product-price`}>
+      <h3 data-testid={ `${index}-product-name` }>{name}</h3>
+      <p data-testid={ `${index}-product-price` }>
         R$
         {` ${price.toFixed(two).toString().replace('.', ',')}`}
       </p>
-      <CardContent className='quantity-div'>
+      <CardContent className="quantity-div">
         <Button
-          variant='contained'
-          color='secondary'
-          data-testid={`${index}-product-minus`}
-          onClick={() => addItem(p, minusOne)}
+          variant="contained"
+          color="secondary"
+          data-testid={ `${index}-product-minus` }
+          onClick={ () => addItem(p, minusOne) }
         >
           {' '}
-          -{' '}
+          -
+          {' '}
         </Button>
-        <p data-testid={`${index}-product-qtd`}>{defineQnt(p, cart)}</p>
+        <p data-testid={ `${index}-product-qtd` }>{defineQnt(p, cart)}</p>
         <Button
-          variant='contained'
-          color='primary'
-          data-testid={`${index}-product-plus`}
-          onClick={() => addItem(p, plusOne)}
+          variant="contained"
+          color="primary"
+          data-testid={ `${index}-product-plus` }
+          onClick={ () => addItem(p, plusOne) }
         >
           {' '}
-          +{' '}
+          +
+          {' '}
         </Button>
       </CardContent>
     </Card>

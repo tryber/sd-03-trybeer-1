@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import cheers from '../../images/cheers.png';
 import './ClientMenu.css';
 import clsx from 'clsx';
 import { Button } from '@material-ui/core';
@@ -11,8 +10,12 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
+import cheers from '../../images/cheers.png';
 
 const drawerWidth = 240;
+const three = 3;
+const zero = 0;
+const two = 2;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(two),
   },
   hide: {
     display: 'none',
@@ -48,14 +51,14 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(zero, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(three),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -90,67 +93,73 @@ function ClientMenu() {
     setOpen(false);
   };
   return (
-    <div className={classes.root}>
+    <div className={ classes.root }>
       <CssBaseline />
       <AppBar
         position="fixed"
         color="white"
-        className={clsx(classes.appBar, {
+        className={ clsx(classes.appBar, {
           [classes.appBarShift]: open,
-        })}
+        }) }
       >
         <div className="top-menu">
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={ handleDrawerOpen }
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={ clsx(classes.menuButton, open && classes.hide) }
           >
-            <FontAwesomeIcon icon={faBars} size="1x" data-testid="top-hamburguer" id="main-icon"/>
-          </IconButton> 
-          <img src={cheers} alt="Cheers Logo"/>
+            <FontAwesomeIcon icon={ faBars } size="1x" data-testid="top-hamburguer" id="main-icon" />
+          </IconButton>
+          <img src={ cheers } alt="Cheers Logo" />
         </div>
       </AppBar>
       <Drawer
-        className={classes.drawer}
+        className={ classes.drawer }
         variant="persistent"
         anchor="left"
-        open={open}
-        classes={{
+        open={ open }
+        classes={ {
           paper: classes.drawerPaper,
-        }}
+        } }
       >
-        <div className={classes.drawerHeader}>
-          <FontAwesomeIcon icon={faBars} size="2x" data-testid="top-hamburguer" onClick={handleDrawerClose} />
+        <div className={ classes.drawerHeader }>
+          <FontAwesomeIcon icon={ faBars } size="2x" data-testid="top-hamburguer" onClick={ handleDrawerClose } />
         </div>
         <div className="menu-links">
-          <Link to="/products" data-testid="side-menu-item-products"><Button variant="outlined" color="primary" id="button-link-client">
-            Produtos
-          </Button></Link>
-          <Link to="/orders" data-testid="side-menu-item-my-orders"><Button variant="outlined" color="primary" id="button-link-client">
-            Meus Pedidos
-          </Button></Link>
-          <Link to="/profile" data-testid="side-menu-item-my-profile"><Button variant="outlined" color="primary" id="button-link-client">
-            Meu Perfil
-          </Button></Link>
-          <Button 
+          <Link to="/products" data-testid="side-menu-item-products">
+            <Button variant="outlined" color="primary" id="button-link-client">
+              Produtos
+            </Button>
+          </Link>
+          <Link to="/orders" data-testid="side-menu-item-my-orders">
+            <Button variant="outlined" color="primary" id="button-link-client">
+              Meus Pedidos
+            </Button>
+          </Link>
+          <Link to="/profile" data-testid="side-menu-item-my-profile">
+            <Button variant="outlined" color="primary" id="button-link-client">
+              Meu Perfil
+            </Button>
+          </Link>
+          <Button
             variant="outlined"
             color="primary"
-            data-testid="side-menu-item-logout"  
+            data-testid="side-menu-item-logout"
             className="logout-button"
-            onClick={(e) => logout(e, history)}
+            onClick={ (e) => logout(e, history) }
           >
             Sair
           </Button>
         </div>
       </Drawer>
       <main
-        className={clsx(classes.content, {
+        className={ clsx(classes.content, {
           [classes.contentShift]: open,
-        })}
+        }) }
       >
-        <div className={classes.drawerHeader} />
+        <div className={ classes.drawerHeader } />
       </main>
     </div>
   );

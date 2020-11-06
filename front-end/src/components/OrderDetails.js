@@ -9,7 +9,8 @@ import {
 import axios from 'axios';
 import { ClientMenu } from './Menu/index';
 import toBRCurrency from '../helpers/currency';
-import './OrderDetails'
+import './OrderDetails.css';
+
 async function getOrder(id, setMessage, setOrder) {
   const user = JSON.parse(localStorage.getItem('user')) || null;
   try {
@@ -69,13 +70,13 @@ export default function Checkout() {
           {' '}
         </h4>
         <Table>
-        <TableHead>
-        <TableRow>
-          <TableCell>Unidades</TableCell>
-          <TableCell>Nome</TableCell>
-          <TableCell>Preço Total</TableCell>
-        </TableRow>
-      </TableHead>
+          <TableHead>
+            <TableRow>
+              <TableCell>Unidades</TableCell>
+              <TableCell>Nome</TableCell>
+              <TableCell>Preço Total</TableCell>
+            </TableRow>
+          </TableHead>
           {
             order.saleProducts
             && order.saleProducts.map((product, index) => productRow(product, index))

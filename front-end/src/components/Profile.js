@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   TextField,
   Button,
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { ContextAplication } from '../context/ContextAplication';
 import { ClientMenu, AdminMenu } from './Menu/index';
 import './Profile.css';
 
@@ -28,7 +27,6 @@ const handlePerfilChange = async (e, name, setError) => {
 };
 
 function Profile() {
-
   // validation based on code from https://github.com/tryber/sd-04-recipes-app-4/blob/master/src/pages/Profile.jsx
   const lastStorage = JSON.parse(localStorage.getItem('user')) || {};
   const { email, role } = lastStorage;
@@ -60,15 +58,15 @@ function Profile() {
         { role === 'administrator'
           ? (
             <TextField
-            type="email"
-            id="email"
-            label="Email"
-            value={ email }
-            data-testid="profile-email-input"
-            readOnly
-            variant="outlined"
-            size="medium"
-          />
+              type="email"
+              id="email"
+              label="Email"
+              value={ email }
+              data-testid="profile-email-input"
+              readOnly
+              variant="outlined"
+              size="medium"
+            />
           )
           : (<TextField
             type="email"
@@ -79,21 +77,20 @@ function Profile() {
             readOnly
             variant="outlined"
             size="medium"
-          />)
-        }
+          />)}
 
         { role === 'administrator'
           ? (
             <TextField
-            type="name"
-            label="Name"
-            value={ name }
-            onChange={ (event) => setName(event.target.value) }
-            required
-            data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
-            variant="outlined"
-            size="medium"
-        />
+              type="name"
+              label="Name"
+              value={ name }
+              onChange={ (event) => setName(event.target.value) }
+              required
+              data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
+              variant="outlined"
+              size="medium"
+            />
           )
           : <TextField
             type="name"
@@ -104,11 +101,11 @@ function Profile() {
             data-testid={ role === 'administrator' ? 'profile-name' : 'profile-name-input' }
             variant="outlined"
             size="medium"
-        />}
+          />}
 
         <Button
           disabled={ disabled }
-          color='primary'
+          color="primary"
           contained
           type="submit"
           onClick={ (event) => handlePerfilChange(event, name, setMessage, history) }
